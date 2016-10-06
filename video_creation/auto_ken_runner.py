@@ -17,8 +17,9 @@ def single_auto_ken_runner(filename, num_seconds):
 
 def make_full_vid(vid_arr, output_name = "mp_test_with_ytho.mp4"):
     start_vid = time.clock()
-    output_folder = 'output_folder/'
+    # output_folder = 'output_videos/'
     output_path = output_folder + output_name
+    output_path = output_name
     #vid = cv2.VideoWriter('combo_new_vid.avi', cv2.cv.CV_FOURCC('m', 'p', '4', 'v'), 24, (1920,1080), False)
     clips_arr = []
     for i in range(0, len(vid_arr)):
@@ -30,11 +31,11 @@ def make_full_vid(vid_arr, output_name = "mp_test_with_ytho.mp4"):
         print "Finished image " + str(i) + " in " + str(end_img - start_img) + " seconds."
 
     final_clip = mp.concatenate_videoclips(clips_arr)
-    print "VID DURATION: " + str(final_clip)
-    aud = mp.AudioFileClip("audio/Carrie.mp3")
-    print "INIT aud duration: " + str(aud.duration)
-    aud.set_duration(5)
-    print "FINAL aud duration: " + str(aud.duration)
+    # print "VID DURATION: " + str(final_clip)
+    # aud = mp.AudioFileClip("audio/Carrie.mp3")
+    # print "INIT aud duration: " + str(aud.duration)
+    # aud.set_duration(5)
+    # print "FINAL aud duration: " + str(aud.duration)
 
     final_clip.write_videofile(output_path)
     #real_clip = final_clip.set_audio(aud)
@@ -57,5 +58,5 @@ def all_ken_runner(f_names, time_arr):
 
 
 if __name__ == '__main__':
-    all_ken_runner(['pup.jpg', 'doge.jpg', 'duck.jpg', 'scene1.jpg', 'scene3.jpg', 'scene2.jpg', 'ytho.jpg'], [4, 5, 3, 5, 4, 6, 4])
+    all_ken_runner(['scene1.jpg', 'scene3.jpg', 'scene2.jpg'], [8, 10, 9])
     print "DONE 2"
