@@ -1,13 +1,13 @@
 import sys, os, glob
 import cv2
 import numpy
-from matplotlib import pyplot 
+from matplotlib import pyplot
 import math, random
 from PIL import Image
 from gtts import gTTS
 
 def test_string():
-    test_str = "Northwestern 38 Iowa 31 let's go Northwestern! Bruh bruh lmao lol gotem gg"
+    test_str = "Northwestern 38 Iowa 31 let's go Northwestern! Hi"
     return test_str
 
 def create_audio(input_str):
