@@ -42,7 +42,7 @@ def random_bounding_box(w_px, h_px):
     return [box_x, box_y, box_width, box_height]
 
 #(2,6) or (3,7)
-def vid_wiggle(box_arr, freq = 2, move_scale = 6):
+def vid_wiggle(box_arr, freq = 3, move_scale = 7):
     num_effects = 24 * freq
     num_frames_per_effect = int(len(box_arr) / num_effects)
     effects = []
