@@ -40,7 +40,7 @@ def make_full_vid(vid_arr, output_name):
     #real_clip = final_clip.set_audio(aud)
     # real_clip.write_videofile("moviepy_test_new.mp4")
     #vid.release()
-    print "Finished video in " + str(end_img - start_img) + " seconds."
+    # print "Finished video in " + str(end_img - start_img) + " seconds."
     return 0
 
 
@@ -58,5 +58,4 @@ def all_ken_runner(f_names, time_arr, output_name = 'KB Video.mp4'):
 
 if __name__ == '__main__':
     output_fname = raw_input("Please enter an output filename: ")
-    all_ken_runner(['scene1.jpg', 'scene3.jpg', 'scene2.jpg'], [8, 10, 9], output_fname)
-    print "DONE 2"
+    all_ken_runner(['scene1.jpg', 'scene3.jpg', 'scene2.jpg'], [12, 14, 13], output_fname)
