@@ -41,6 +41,21 @@ def random_bounding_box(w_px, h_px):
 
     return [box_x, box_y, box_width, box_height]
 
+#(2,6) or (3,7)
+def vid_wiggle(box_arr, freq = 2, move_scale = 6):
+    num_effects = 24 * freq
+    num_frames_per_effect = int(len(box_arr) / num_effects)
+    effects = []
+    for i in range(0, num_effects):
+        effect_x = int((float(random.randint(0, 100)) / float(100)) * float(move_scale))
+        effect_y = int((float(random.randint(0, 100)) / float(100)) * float(move_scale))
+        for j in range(0, num_frames_per_effect):
+            box_arr[num_frames_per_effect * i + j][0] = box_arr[num_frames_per_effect * i + j][0] + effect_x
+            box_arr[num_frames_per_effect * i + j][1] = box_arr[num_frames_per_effect * i + j][1] + effect_y
+
+    return box_arr
+
+
 def random_box_with_ratio(w_px, h_px):
     aspect_ratio = float(w_px) / float(h_px)
     box_height = int((float(random.randint(60, 100)) / float(100)) * float(h_px))
@@ -90,8 +105,9 @@ def box_interpolate(w_px, h_px, num_sec):
         box_arr.append([curr_x, curr_y, curr_w, curr_h])
 
     box_arr.append([box_x_end, box_y_end, box_w_end, box_h_end])
-    #print str(box_arr)
-    return box_arr
+
+    return vid_wiggle(box_arr)
+    # return box_arr
 
 def ken_crop(img_arr, box_arr):
     len_arr = len(img_arr)
@@ -198,7 +214,7 @@ def make_vid(cropped_arr):
     test_vid.release()
 
 if __name__ == '__main__':
-    
+
     num_seconds = 4
     [image, height_px, width_px] = get_img_file('pup.jpg')
     print "WIDTH: " + str(width_px) + " HEIGHT: " + str(height_px)
