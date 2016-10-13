@@ -59,9 +59,13 @@ def fetchBio(param):
 
     for i in range(0, len(pageContent)):
         try:
-            pageContent[i][0] = re.sub('[!@#$=\/]', '', pageContent[i][0].rstrip("\n"))
-            pageContent[i][1] = re.sub('[!@#$=\/]', '', pageContent[i][1].rstrip("\n"))
-
+            pageContent[i][0] = re.sub('[!@#$=\/]', '', pageContent[i][0].replace("\n", ''))
+            pageContent[i][0] = re.sub('[!@#$=\/]', '', pageContent[i][0].replace("\\", ''))
+            pageContent[i][0] = re.sub('[!@#$=\/]', '', pageContent[i][0].replace("\\\\", ''))
+            
+            pageContent[i][1] = re.sub('[!@#$=\/]', '', pageContent[i][1].replace("\n", ''))
+            pageContent[i][0] = re.sub('[!@#$=\/]', '', pageContent[i][1].replace("\\", ''))
+            pageContent[i][0] = re.sub('[!@#$=\/]', '', pageContent[i][1].replace("\\\\", ''))
             summarized.append([ pageContent[i][0] , summarize(pageContent[i][1]) ])
         except:
             continue
