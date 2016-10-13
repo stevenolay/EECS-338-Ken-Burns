@@ -15,11 +15,10 @@ def single_auto_ken_runner(filename, num_seconds):
 
     return cropped_arr
 
-def make_full_vid(vid_arr, output_name = "mp_test_with_ytho.mp4"):
+def make_full_vid(vid_arr, output_name):
     start_vid = time.clock()
-    # output_folder = 'output_videos/'
+    output_folder = 'output_videos/'
     output_path = output_folder + output_name
-    output_path = output_name
     #vid = cv2.VideoWriter('combo_new_vid.avi', cv2.cv.CV_FOURCC('m', 'p', '4', 'v'), 24, (1920,1080), False)
     clips_arr = []
     for i in range(0, len(vid_arr)):
@@ -41,11 +40,11 @@ def make_full_vid(vid_arr, output_name = "mp_test_with_ytho.mp4"):
     #real_clip = final_clip.set_audio(aud)
     # real_clip.write_videofile("moviepy_test_new.mp4")
     #vid.release()
-    print "Finished video in " + str(end_img - start_img) + " seconds."
+    # print "Finished video in " + str(end_img - start_img) + " seconds."
     return 0
 
 
-def all_ken_runner(f_names, time_arr):
+def all_ken_runner(f_names, time_arr, output_name = 'KB Video.mp4'):
     ### remove these 2 lines when actual filenames are inputted as a list
     # f_names = ['pup.jpg', 'scene1.jpg', 'ytho.jpg', 'scene2.jpg']
     # time_arr = [4, 3, 5, 4]
@@ -53,10 +52,10 @@ def all_ken_runner(f_names, time_arr):
     for i in range(0, len(f_names)):
         vid_imgs_arr.append(single_auto_ken_runner(f_names[i], time_arr[i]))
 
-    make_full_vid(vid_imgs_arr)
+    make_full_vid(vid_imgs_arr, output_name)
     print "DONE"
 
 
 if __name__ == '__main__':
-    all_ken_runner(['scene1.jpg', 'scene3.jpg', 'scene2.jpg'], [8, 10, 9])
-    print "DONE 2"
+    output_fname = raw_input("Please enter an output filename: ")
+    all_ken_runner(['scene1.jpg', 'scene3.jpg', 'scene2.jpg'], [12, 14, 13], output_fname)
