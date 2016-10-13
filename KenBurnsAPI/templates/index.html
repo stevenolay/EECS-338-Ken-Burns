@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+	<div class="logo">
+		<ul>
+	    <li class="title"><p>RodBot</p></li>
+		</ul>
+	</div>
+    <div class="chat" id="chat">
+  <ul id="chatcontainter">
+    <li class="narImage"><img src="{{ url_for('static', filename='small3.jpeg') }}">
+      <div class="narrator">
+          <div id="typed-strings">
+              <p>Hey! How are you doing? Rod here. Welcome to my zone. I'm here to provide you with news stories that can be anything from happy and interesting to downright chilling.<br><br> What type of story would you like today? </br><br>
+								eg. Type "happy" then press "Send", and I will show you a happy story.... maybe :) . 
+							</p>
+          </div>
+		<span id="typed" ></span>
+      </div>
+    </li>
+
+
+  </ul>
+ </div>
+ <div class="submit">
+
+        Tell me something
+     <input type="text" id="inputBox" name="formVal" value="" /><button onclick="findArticle2()">Send</button>
+</div>
+
+</div>
+
+
+{% endblock %}
