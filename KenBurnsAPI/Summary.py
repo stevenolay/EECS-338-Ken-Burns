@@ -50,7 +50,11 @@ class FrequencySummarizer:
       for w in sent:
         if w in self._freq:
           ranking[i] += self._freq[w]
-    sents_idx = self._rank(ranking, n)    
+    sents_idx = self._rank(ranking, n)
+    temp = ''
+    for j in sents_idx:
+        temp += str(sents[j])
+    return temp    
     return [sents[j] for j in sents_idx]
 
   def _rank(self, ranking, n):

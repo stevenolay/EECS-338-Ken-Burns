@@ -36,7 +36,7 @@ app.config.from_object(__name__)
 
 @app.route('/')
 def show_vanilla_home():
-    return render_template('welcome.html', data = {'status': '', 'article_url': ''}) #Loads Welcome Page
+    return render_template('index.html') #Loads Welcome Page
 
 @app.route('/fetch/<param>')
 def fetchBio(param):
@@ -44,8 +44,14 @@ def fetchBio(param):
     tempParam = "Jimmy Hendrix"
 
     page = wikipedia.page(tempParam)
+    content = page.content
 
-    firstSplit = page.content.split("==")
+    content = string.replace(content, "====", '|')
+    content = string.replace(content, "===", '|')
+    content = string.replace(content, "==", '|')
+    content = string.replace(content, "=", '|')
+
+    firstSplit = content.split("|")
 
     pageContent = [['Summary', firstSplit[0].encode('ascii', 'ignore')]]
 
@@ -53,24 +59,18 @@ def fetchBio(param):
         topic = firstSplit[i]
         content = firstSplit[i+1]
         pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
+
     summarized = []
-
-    #return  summarize(pageContent[0][1])
-
+    
     for i in range(0, len(pageContent)):
         try:
-            pageContent[i][0] = re.sub('[!@#$=\/]', '', pageContent[i][0].replace("\n", ''))
-            pageContent[i][0] = re.sub('[!@#$=\/]', '', pageContent[i][0].replace("\\", ''))
-            pageContent[i][0] = re.sub('[!@#$=\/]', '', pageContent[i][0].replace("\\\\", ''))
-            
-            pageContent[i][1] = re.sub('[!@#$=\/]', '', pageContent[i][1].replace("\n", ''))
-            pageContent[i][0] = re.sub('[!@#$=\/]', '', pageContent[i][1].replace("\\", ''))
-            pageContent[i][0] = re.sub('[!@#$=\/]', '', pageContent[i][1].replace("\\\\", ''))
             summarized.append([ pageContent[i][0] , summarize(pageContent[i][1]) ])
         except:
             continue
-    img = '<img src="%s" alt="Mountain View" style="width:304px;height:228px;">'%(page.images[1])
-    return str(summarized) 
+
+    img = '<img src="%s" alt="Mountain View" style="width:304px;height:228px;">'%(page.images[3])
+    
+    return str(summarized)
     
 def summarize(content):
 
