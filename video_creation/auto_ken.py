@@ -13,10 +13,14 @@ from ken_effects import *
 
 def get_img_file(filename):
     f_path = 'images/' + filename
+    print "Name: " + str(f_path)
     img = cv2.imread(f_path, 1)
+    # if img == None:
+    #     return [-1, -1, -1, -1]
+    face_boxes = face_detect_boxes(img)
     print "ROWS: " + str(len(img)) + " COLS: " + str(len(img[0]))
     print "Loaded image file into openCV"
-    return [img, len(img), len(img[0])]
+    return [img, len(img), len(img[0]), face_boxes]
 
 #creates an array of the same image of the size 24 FPS * number of seconds
 def generate_img_array(img, num_sec):
@@ -43,18 +47,68 @@ def random_box_with_ratio(w_px, h_px):
 
     return [box_x, box_y, box_width, box_height]
 
+def pan_box(w_px, h_px, side):
+    #can't pan on an image that is more square than 1920 x 1080
+    box_x = 0
+    box_y = 0
+    box_w = h_px
+    box_h = h_px
+    if side == 'right':
+        box_x = w_px - box_w - 1
 
-def box_interpolate(w_px, h_px, num_sec):
+    return [box_x, box_y, box_w, box_h]
+
+def zoom_box(w_px, h_px, f_box = []):
+    if len(f_box) != 0:
+        zoom_w = random.randint(f_box[2], w_px)
+        zoom_h = random.randint(f_box[3], h_px)
+        zoom_x = random.randint(0, f_box[0])
+        zoom_y = random.randint(0, f_box[1])
+
+        return [zoom_x, zoom_y, zoom_w, zoom_h]
+    else:
+        return random_box_with_ratio(w_px, h_px)
+
+def first_last_boxes(w_px, h_px, faces, effect = 'random'):
+    start_list = [0, 0, 0, 0]
+    end_list = [0, 0, 0, 0]
+    if effect.find('zoom') != -1:
+        temp_list = zoom_box(w_px, h_px, faces[0])
+        if effect.find('in') != -1: #zoom in effect
+            start_list = [0, 0, w_px, h_px]
+            end_list = temp_list
+        else: #zoom out
+            start_list = temp_list
+            end_list = [0, 0, w_px, h_px]
+        return [start_list, end_list]
+
+    if effect.find('pan') != -1:
+        #change left_list, right_list defs to be real things
+        left_list = pan_box(w_px, h_px, 'left')
+        right_list = pan_box(w_px, h_px, 'right')
+        # left right, maybe change earlier params
+        if effect.find('left to right') != -1: #pan right to left
+            return [left_list, right_list]
+        else:  #pan left to right
+            return [right_list, left_list]
+
+    start_list = random_box_with_ratio(w_px, h_px)
+    end_list = random_box_with_ratio(w_px, h_px)
+    return [start_list, end_list]
+
+def box_interpolate(w_px, h_px, num_sec, faces, prev_effect = 'random'):
     num_end_interps = 24
-    [box_x_start, box_y_start, box_w_start, box_h_start] = random_box_with_ratio(w_px, h_px)
-    #print "START: " + str([box_x_start, box_y_start, box_w_start, box_h_start])
-    [box_x_end, box_y_end, box_w_end, box_h_end] = random_box_with_ratio(w_px, h_px)
-    #print "END: " + str([box_x_end, box_y_end, box_w_end, box_h_end])
     num_interps = int(float(num_sec - 2) * float(24))
     print "number of interpolations: " + str(num_interps)
+
+    [effect, faces] = pick_effect(w_px, h_px, faces, prev_effect)
+
+    [start_box, end_box] = first_last_boxes(w_px, h_px, faces, effect)
+    [box_x_start, box_y_start, box_w_start, box_h_start] = start_box
+    [box_x_end, box_y_end, box_w_end, box_h_end] = end_box
+
     box_arr = []
 
-    # box_arr.append([box_x_start, box_y_start, box_w_start, box_h_start])
     x_delta = int((box_x_end - box_x_start) / num_interps)
     y_delta = int((box_y_end - box_y_start) / num_interps)
     width_delta = int((box_w_end - box_w_start) / num_interps)
@@ -81,11 +135,12 @@ def box_interpolate(w_px, h_px, num_sec):
     for i in range(0, num_end_interps):
         box_arr.append(box_arr[num_end_interps + num_interps + i - 1])
 
-    return vid_wiggle(box_arr)
+    return [vid_wiggle(box_arr, w_px, h_px), effect]
     # return box_arr
 
 def ken_crop_with_ratio(img_arr, box_arr):
     len_arr = len(img_arr)
+    #print "Box arr: " + str(box_arr)
 
     for i in range(0, len_arr):
         #print str(i)
@@ -127,6 +182,7 @@ def ken_crop_with_ratio(img_arr, box_arr):
         #print "SHAPE 2222: " + str(img_arr[i].shape)
 
     print "KB DONE in images"
+    print " "
     return img_arr[:(len_arr - 1)]
 
 def save_images(cropped_arr):

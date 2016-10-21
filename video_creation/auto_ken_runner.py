@@ -7,13 +7,15 @@ from PIL import Image
 from auto_ken import *
 import moviepy.editor as mp
 
-def single_auto_ken_runner(filename, num_seconds):
-    [image, height_px, width_px] = get_img_file(filename)
+def single_auto_ken_runner(filename, num_seconds, prev_effect):
+    [image, height_px, width_px, faces] = get_img_file(filename)
+    # if image == -1:
+    #     return [[], 'No Image Found']
     i_arr = generate_img_array(image, num_seconds)
-    b_a = box_interpolate(width_px, height_px, num_seconds)
+    [b_a, effect] = box_interpolate(width_px, height_px, num_seconds, faces, prev_effect)
     cropped_arr = ken_crop_with_ratio(i_arr, b_a)
 
-    return cropped_arr
+    return [cropped_arr, effect]
 
 def make_full_vid(vid_arr, output_name):
     start_vid = time.clock()
@@ -38,9 +40,7 @@ def make_full_vid(vid_arr, output_name):
 
     final_clip.write_videofile(output_path)
     #real_clip = final_clip.set_audio(aud)
-    # real_clip.write_videofile("moviepy_test_new.mp4")
     #vid.release()
-    # print "Finished video in " + str(end_img - start_img) + " seconds."
     return 0
 
 
@@ -49,13 +49,19 @@ def all_ken_runner(f_names, time_arr, output_name = 'KB Video.mp4'):
     # f_names = ['pup.jpg', 'scene1.jpg', 'ytho.jpg', 'scene2.jpg']
     # time_arr = [4, 3, 5, 4]
     vid_imgs_arr = []
+    vid_eff = ["random"]
     for i in range(0, len(f_names)):
-        vid_imgs_arr.append(single_auto_ken_runner(f_names[i], time_arr[i]))
+        [arr, eff] = single_auto_ken_runner(f_names[i], time_arr[i], vid_eff[i-1])
+        vid_imgs_arr.append(arr)
+        vid_eff.append(eff)
 
     make_full_vid(vid_imgs_arr, output_name)
+    print "EFFECTS: " + str(vid_eff)
     print "DONE"
 
 
 if __name__ == '__main__':
     output_fname = raw_input("Please enter an output filename: ")
-    all_ken_runner(['scene1.jpg', 'scene3.jpg', 'scene2.jpg'], [12, 14, 13], output_fname)
+    # all_ken_runner(['scene1.jpg', 'scene3.jpg', 'scene2.jpg'], [12, 14, 13], output_fname)
+    # all_ken_runner(['obama.jpg', 'obama_1.jpg', 'obama_2.jpg', 'obama_3.jpg', 'obama_4.jpg', 'obama_5.jpg'], [12, 14, 13, 10, 14, 9], output_fname)
+    all_ken_runner(['obama.jpg', 'obama_1.jpg', 'obama_2.jpg', 'obama_3.jpg', 'obama_4.jpg', 'obama_5.jpg'], [12, 10, 13, 10, 12, 14], output_fname)
