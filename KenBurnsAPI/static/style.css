@@ -1,0 +1,31 @@
+#body {
+  background-color: #DCF7FA;
+}
+
+#parent {
+  position: relative;
+  height: 600px;
+  width: 60%;
+  margin: 0 auto;
+  color: #008080;;
+}
+
+#jumbotron {
+  background-color: #8EF3FE;
+  text-align: center;
+  position: absolute;
+  width: 70%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#input {
+  width: 70%;
+  color: #989C9D;
+}
+
+#title {
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+}
