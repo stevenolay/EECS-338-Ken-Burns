@@ -6,6 +6,22 @@ import json
 import string
 import copy
 import io
+
+from gtts import gTTS
+
+def test_string():
+    test_str = "Northwestern 38 Iowa 31 let's go Northwestern! Hi"
+    return test_str
+
+def create_audio(input_str):
+    tts = gTTS(text = "Northwestern 38 Iowa 31 let's go Northwestern! Hi", lang = 'en')
+
+
+if __name__ == '__main__':
+    stringy = test_string()
+    create_audio(stringy)
+
+
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, jsonify
 
@@ -41,7 +57,7 @@ def show_vanilla_home():
 @app.route('/fetch/<param>')
 def fetchBio(param):
 
-    tempParam = "Jimmy Hendrix"
+    tempParam = "Barack Obama"
 
     page = wikipedia.page(tempParam)
     content = page.content
@@ -53,12 +69,17 @@ def fetchBio(param):
 
     firstSplit = content.split("|")
 
-    pageContent = [['Summary', firstSplit[0].encode('ascii', 'ignore')]]
-
+    #pageContent = [['Summary', firstSplit[0].encode('ascii', 'ignore')]]
+    pageContent = []
+    reachedEarly = False
     for i in range(1,len(firstSplit), 2):
-        topic = firstSplit[i]
-        content = firstSplit[i+1]
-        pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
+
+        topic = firstSplit[i].strip()
+        if re.match('early',topic, re.IGNORECASE):
+            reachedEarly = True
+        if reachedEarly:
+            content = firstSplit[i+1].strip()
+            pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
 
     summarized = []
     
@@ -70,8 +91,26 @@ def fetchBio(param):
 
     img = '<img src="%s" alt="Mountain View" style="width:304px;height:228px;">'%(page.images[3])
     
-    return str(summarized)
-    
+    #return str(summarized)
+    return callVideoMaker(param, summarized)
+
+def callVideoMaker(name, content):
+
+    id = 0
+    ids = []
+    for each in content:
+        tts = gTTS(text = each[1], lang = 'en')
+        save_string = "../video_creation/audio/%s"%(name + str(id)+".mp3")
+        tts.save(save_string)
+        ids.append(name + str(id))
+        id += 1
+
+    return str(ids)
+
+
+
+
+
 def summarize(content):
 
     fs = FrequencySummarizer()
