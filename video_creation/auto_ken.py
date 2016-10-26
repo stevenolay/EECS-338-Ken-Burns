@@ -25,6 +25,7 @@ def get_img_file(filename):
 #creates an array of the same image of the size 24 FPS * number of seconds
 def generate_img_array(img, num_sec):
     img_arr = []
+    print str(num_sec)
     num_frames = int(float(num_sec) * float(24))
     for i in range(0, num_frames):
         img_arr.append(img)
@@ -106,6 +107,8 @@ def box_interpolate(w_px, h_px, num_sec, faces, prev_effect = 'random'):
     [start_box, end_box] = first_last_boxes(w_px, h_px, faces, effect)
     [box_x_start, box_y_start, box_w_start, box_h_start] = start_box
     [box_x_end, box_y_end, box_w_end, box_h_end] = end_box
+    if (box_h_start == 0) or (box_h_end == 0):
+        print "INITIAL DIVIDE BY 0 -- pls fix"
 
     box_arr = []
     print 'START: ' + str([box_x_start, box_y_start, box_w_start, box_h_start])
@@ -135,6 +138,8 @@ def box_interpolate(w_px, h_px, num_sec, faces, prev_effect = 'random'):
 
         curr_w = box_arr[num_end_interps + i-1][2] + width_delta
         curr_h = box_arr[num_end_interps + i-1][3] + height_delta
+        if curr_h == 0:
+            print "DIV BY 0 ERROR -- pls fix"
         box_arr.append([curr_x, curr_y, curr_w, curr_h])
 
     for i in range(0, num_end_interps):

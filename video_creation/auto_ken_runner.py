@@ -6,7 +6,7 @@ import math, random, time
 from PIL import Image
 from auto_ken import *
 import moviepy.editor as mp
-from mutagen.mp3 import mp3
+from mutagen.mp3 import MP3
 
 def single_auto_ken_runner(filename, num_seconds, prev_effect):
     [image, height_px, width_px, faces] = get_img_file(filename)
@@ -37,27 +37,27 @@ def make_full_clip(vid_arr):
 def make_full_vid(arr_arr_i, arr_audio):
     all_clips_arr = []
     for i in range(0, len(arr_arr_i)):
-        curr_aud = MP3('audio/' + str(arr_audio))
+        curr_aud = MP3('audio/' + str(arr_audio[i]))
         len_aud = int(curr_aud.info.length)
         curr_times = []
-        num_images = arr_arr_i[i]
+        num_images = len(arr_arr_i[i])
         avg_time = len_aud / len(arr_arr_i[i])
         if avg_time <= 10:
             arr_arr_i[i] = arr_arr_i[i][:int(len_aud / 10)]
             avg_time = 10
 
         sum_time = 0
-        for i in range(0, num_images):
-            if i == (num_images - 1):
+        for j in range(0, num_images):
+            if j == (num_images - 1):
                 curr_times.append(len_aud - sum_time)
             else:
                 curr_times.append(int(random.randint(avg_time - int(0.2 * avg_time), avg_time + int(0.2 * avg_time))))
-        
-        all_clips_arr.append(all_ken_runner(arr_arr_i[i], arr_audio[i]))
+        #is this right????
+        all_clips_arr.append(all_ken_runner(arr_arr_i[i], curr_times))
 
     final_clip = mp.concatenate_videoclips(all_clips_arr)
     return final_clip
-            
+
 
 def write_vid(output_name, final_clip):
     output_folder = 'videos_no_audio/'
