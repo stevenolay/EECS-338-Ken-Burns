@@ -108,11 +108,16 @@ def box_interpolate(w_px, h_px, num_sec, faces, prev_effect = 'random'):
     [box_x_end, box_y_end, box_w_end, box_h_end] = end_box
 
     box_arr = []
-
+    print 'START: ' + str([box_x_start, box_y_start, box_w_start, box_h_start])
+    print 'END: ' + str([box_x_end, box_y_end, box_w_end, box_h_end])
     x_delta = int((box_x_end - box_x_start) / num_interps)
     y_delta = int((box_y_end - box_y_start) / num_interps)
     width_delta = int((box_w_end - box_w_start) / num_interps)
+    if(width_delta <= 0):
+        print "tooo"
     height_delta = int((box_h_end - box_h_start) / num_interps)
+    if(height_delta <= 0):
+        print "tooooo"
 
     for i in range(0, num_end_interps):
         box_arr.append([box_x_start, box_y_start, box_w_start, box_h_start])
