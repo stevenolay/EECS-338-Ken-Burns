@@ -137,7 +137,10 @@ def box_interpolate(w_px, h_px, num_sec, faces, prev_effect = 'random'):
             curr_y = box_arr[num_end_interps + i-1][1]
 
         curr_w = box_arr[num_end_interps + i-1][2] + width_delta
-        curr_h = box_arr[num_end_interps + i-1][3] + height_delta
+        if (box_arr[num_end_interps + i-1][3] + height_delta > (h_px / 4)):
+            curr_h = box_arr[num_end_interps + i-1][3] + height_delta
+        else:
+            curr_h = box_arr[num_end_interps + i-1][3]
         if curr_h == 0:
             print "DIV BY 0 ERROR -- pls fix"
         box_arr.append([curr_x, curr_y, curr_w, curr_h])
