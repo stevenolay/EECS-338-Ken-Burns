@@ -4,10 +4,10 @@
 
 #parent {
   position: relative;
-  height: 600px;
+  height: 400px;
   width: 60%;
   margin: 0 auto;
-  color: #008080;;
+  color: #008080;
 }
 
 #jumbotron {
@@ -17,8 +17,34 @@
   width: 70%;
   top: 50%;
   left: 50%;
+  border-radius: 30px;
   transform: translate(-50%, -50%);
 }
+
+#images {
+  background-image: url('Test.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 800px;
+  height: 400px; 
+} 
+
+#rectangle {
+    border-radius: 25px;
+    background: #87CEFA;
+    width: 800px;
+    height: 400px; 
+    font-size: 50px; 
+    text-align: center;
+    padding-top: 150px;
+}
+
+#progress {
+  width: 70%;
+  margin-left: auto; 
+  margin-right: auto;
+}
+
 
 #input {
   width: 70%;
@@ -26,6 +52,19 @@
 }
 
 #title {
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Great Vibes", cursive; 
+  font-size: 75px; 
+  line-height: 160px; 
+  font-weight: normal; 
+  text-shadow: 0 1px 1px #fff; 
   text-align: center;
 }
+
+#navbar {
+  color: #DCF7FA;
+}
+
+  background-image: url('searchicon.png');
+  background-position: 295px 2px;
+  background-repeat: no-repeat;
+

@@ -12,20 +12,6 @@ import random
 from gtts import gTTS
 from py_bing_search import PyBingImageSearch
 
-
-def test_string():
-    test_str = "Northwestern 38 Iowa 31 let's go Northwestern! Hi"
-    return test_str
-
-def create_audio(input_str):
-    tts = gTTS(text = "Northwestern 38 Iowa 31 let's go Northwestern! Hi", lang = 'en')
-
-
-if __name__ == '__main__':
-    stringy = test_string()
-    create_audio(stringy)
-
-
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, jsonify
 
@@ -51,7 +37,6 @@ PASSWORD = 'default'
 
 BING_API_KEY = 'wrtWDMR91PXsFFEHRYN1ZQSObkZMFvHJRljl6zyNiCI'
 IMAGE_FILTER = 'Size:Large+Color:Color+Style:Photo'
-
 
 # create our little application :)
 app = Flask(__name__)
