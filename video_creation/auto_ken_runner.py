@@ -18,6 +18,7 @@ def single_auto_ken_runner(filename, num_seconds, prev_effect):
 
     return [cropped_arr, effect]
 
+#possible performance improvement -- instead of creating clips just create a large array and then pass them to all_clips_arr
 def make_full_clip(vid_arr):
     #start_vid = time.clock()
     #output_folder = 'videos_no_audio/'

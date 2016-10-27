@@ -12,7 +12,7 @@ def make_total_vid(name, arr_arr_images, arr_audio):
 
     vid_only_name = vid_name + '_vid.mp4'
     aud_only_name = vid_name + '_aud.mp4'
-    vid_name = vid_name + '.mp4'
+    vid_name = vid_name + '_test.mp4'
 
     print "Video Name: " + vid_name
     print "Video Only Name: " + vid_only_name
