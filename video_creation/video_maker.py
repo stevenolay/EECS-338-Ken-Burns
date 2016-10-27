@@ -21,12 +21,8 @@ def make_total_vid(name, arr_arr_images, arr_audio):
     overall_runner(vid_only_name, arr_arr_images, arr_audio)
 
     #combine all audio into a single audio file
-    concat_audio(aud_only_name, arr_audio)
-
-    #combine audio and video
-    combine_av(vid_only_name, aud_only_name, vid_name)
-
+    concat_audio(vid_only_name, arr_audio, vid_name)
 
 if __name__ == '__main__':
     # all_ken_runner(['obama.jpg', 'obama_1.jpg', 'obama_2.jpg', 'obama_3.jpg', 'obama_4.jpg', 'obama_5.jpg'], [12, 10, 13, 10, 12, 14], output_fname)
-    make_total_vid("Barack Obama", [['obama.jpg', 'obama_1.jpg', 'obama_2.jpg', 'obama_3.jpg', 'obama_4.jpg', 'obama_5.jpg']], ["Carrie.mp3"])
+    make_total_vid("Barack Obama", [['obama.jpg', 'obama_1.jpg']], ["jimmy2.mp3"])

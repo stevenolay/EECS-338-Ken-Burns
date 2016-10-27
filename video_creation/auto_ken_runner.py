@@ -53,9 +53,11 @@ def make_full_vid(arr_arr_i, arr_audio):
             else:
                 curr_times.append(int(random.randint(avg_time - int(0.2 * avg_time), avg_time + int(0.2 * avg_time))))
         #is this right????
+        print "TIMES: " + str(curr_times)
         all_clips_arr.append(all_ken_runner(arr_arr_i[i], curr_times))
 
     final_clip = mp.concatenate_videoclips(all_clips_arr)
+    print "FINAL CLIP RETURNED"
     return final_clip
 
 
@@ -65,6 +67,7 @@ def write_vid(output_name, final_clip):
     final_clip.write_videofile(output_path)
 
 def all_ken_runner(f_names, time_arr):
+    print "IN ALL KEN RUNNER"
     vid_imgs_arr = []
     vid_eff = ["random"]
     for i in range(0, len(f_names)):
