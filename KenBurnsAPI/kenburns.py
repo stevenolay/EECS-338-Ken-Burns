@@ -6,8 +6,12 @@ import json
 import string
 import copy
 import io
+import random
 
+#Imports for Audio and Images
 from gtts import gTTS
+from py_bing_search import PyBingImageSearch
+
 
 def test_string():
     test_str = "Northwestern 38 Iowa 31 let's go Northwestern! Hi"
@@ -45,10 +49,13 @@ SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
 
+BING_API_KEY = 'wrtWDMR91PXsFFEHRYN1ZQSObkZMFvHJRljl6zyNiCI'
+IMAGE_FILTER = 'Size:Large+Color:Color+Style:Photo'
+
+
 # create our little application :)
 app = Flask(__name__)
 app.config.from_object(__name__)
-
 
 @app.route('/')
 def show_vanilla_home():
@@ -59,7 +66,7 @@ def fetchBio(param):
 
     tempParam = "Barack Obama"
 
-    page = wikipedia.page(tempParam)
+    page = wikipedia.page(param)
     content = page.content
 
     content = string.replace(content, "====", '|')
@@ -71,15 +78,15 @@ def fetchBio(param):
 
     #pageContent = [['Summary', firstSplit[0].encode('ascii', 'ignore')]]
     pageContent = []
-    reachedEarly = False
+    #reachedEarly = False
     for i in range(1,len(firstSplit), 2):
 
         topic = firstSplit[i].strip()
-        if re.match('early',topic, re.IGNORECASE):
-            reachedEarly = True
-        if reachedEarly:
-            content = firstSplit[i+1].strip()
-            pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
+        #if re.match('early',topic, re.IGNORECASE):
+            #reachedEarly = True
+        #if reachedEarly:
+        content = firstSplit[i+1].strip()
+        pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
 
     summarized = []
     
@@ -97,16 +104,30 @@ def fetchBio(param):
 def callVideoMaker(name, content):
 
     id = 0
-    ids = []
+    arr_audio = []
     for each in content:
         tts = gTTS(text = each[1], lang = 'en')
         save_string = "../video_creation/audio/%s"%(name + str(id)+".mp3")
         tts.save(save_string)
-        ids.append(name + str(id))
+
+        arr_audio.append(name + str(id))
         id += 1
 
-    return str(ids)
+    arr_arr_images = []
+    for each in content:
+        topic = each[0]
 
+        query_topic = name + " " + topic
+
+        bing_image = PyBingImageSearch(BING_API_KEY, query_topic, image_filters= IMAGE_FILTER) 
+        first_fifty_result= bing_image.search(limit=50, format='json') #1-50
+
+        media = [x.media_url for x in first_fifty_result]
+
+        arr_arr_images.append(media)
+
+    return str(arr_arr_images) 
+#def make_total_vid(name, arr_arr_images, arr_audio):
 
 
 
