@@ -8,9 +8,9 @@
 
   <title>Bootstrap 101 Template</title>
 
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
-  <script src="Implementation.js"> </script>
+  <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet">
+  <script src="{{ url_for('static', filename='Implementation.js')}}"> </script>
 
 </head>
 
@@ -46,7 +46,7 @@
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="css/bootstrap.min.js"></script>
+  <script src="{{ url_for('static', filename='css/bootstrap.min.js')}}"></script>
 
 </body>
 </html>
