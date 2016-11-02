@@ -26,6 +26,8 @@ import random
 # EXTERNAL API IMPORTS
 import wikipedia
 from Summary import *
+from video_creation import video_maker
+#from video_maker import *
 
 
 # configuration
@@ -92,26 +94,28 @@ def callVideoMaker(name, content):
     arr_audio = []
     for each in content:
         tts = gTTS(text = each[1], lang = 'en')
-        save_string = "../video_creation/audio/%s"%(name + str(id)+".mp3")
+        save_string = "video_creation/audio/%s"%(name + str(id)+".mp3")
         tts.save(save_string)
 
-        arr_audio.append(name + str(id))
+        arr_audio.append(name + str(id)+".mp3")
         id += 1
 
     arr_arr_images = []
-    for each in content:
-        topic = each[0]
+    # for each in content:
+    #     topic = each[0]
 
-        query_topic = name + " " + topic
+    #     query_topic = name + " " + topic
 
-        bing_image = PyBingImageSearch(BING_API_KEY, query_topic, image_filters= IMAGE_FILTER) 
-        first_fifty_result= bing_image.search(limit=50, format='json') #1-50
+    #     bing_image = PyBingImageSearch(BING_API_KEY, query_topic, image_filters= IMAGE_FILTER) 
+    #     first_fifty_result= bing_image.search(limit=50, format='json') #1-50
 
-        media = [x.media_url for x in first_fifty_result]
+    #     media = [x.media_url for x in first_fifty_result]
 
-        arr_arr_images.append(media)
+    #     arr_arr_images.append(media)
 
-    return str(arr_arr_images) 
+    
+    video_maker.make_total_vid(name, arr_arr_images, arr_audio)
+    return str("success") 
 #def make_total_vid(name, arr_arr_images, arr_audio):
 
 
