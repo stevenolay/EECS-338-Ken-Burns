@@ -76,7 +76,7 @@ def fetchBio(param):
         pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
 
     summarized = []
-    
+
     for i in range(0, len(pageContent)):
         try:
             summarized.append([ pageContent[i][0] , summarize(pageContent[i][1]) ])
@@ -84,7 +84,7 @@ def fetchBio(param):
             continue
 
     img = '<img src="%s" alt="Mountain View" style="width:304px;height:228px;">'%(page.images[3])
-    
+
     #return str(summarized)
     return callVideoMaker(param, summarized)
 
@@ -101,21 +101,21 @@ def callVideoMaker(name, content):
         id += 1
 
     arr_arr_images = []
-    # for each in content:
-    #     topic = each[0]
+    for each in content:
+        topic = each[0]
 
-    #     query_topic = name + " " + topic
+        query_topic = name + " " + topic
 
-    #     bing_image = PyBingImageSearch(BING_API_KEY, query_topic, image_filters= IMAGE_FILTER) 
-    #     first_fifty_result= bing_image.search(limit=50, format='json') #1-50
+        bing_image = PyBingImageSearch(BING_API_KEY, query_topic, image_filters= IMAGE_FILTER)
+        first_fifty_result= bing_image.search(limit=50, format='json') #1-50
 
-    #     media = [x.media_url for x in first_fifty_result]
+        media = [x.media_url for x in first_fifty_result]
 
-    #     arr_arr_images.append(media)
+        arr_arr_images.append(media)
 
-    
+
     video_maker.make_total_vid(name, arr_arr_images, arr_audio)
-    return str("success") 
+    return str("success")
 #def make_total_vid(name, arr_arr_images, arr_audio):
 
 

@@ -28,6 +28,26 @@
   width: 800px;
   height: 400px;
 }
+.mdl-grid {
+  display: flex !important;
+  max-width: 900px;
+}
+
+.duck-pic .mdl-card__media {
+  background-image: url('duck.jpg');
+}
+
+.mdl-card__media {
+  box-sizing: border-box;
+  background-size: cover;
+}
+/*#vid_1 {
+  background-image: url('Barack_Obama_vid.mp4');
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 173px;
+  height: 157px;
+}*/
 
 #rectangle {
     /*border-radius: 25px;*/

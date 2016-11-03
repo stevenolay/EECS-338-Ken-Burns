@@ -3,8 +3,9 @@ from ken_audio_video import *
 from auto_ken_runner import *
 
 def make_total_vid(name, arr_arr_images, arr_audio):
-    name  = "Barack Obama"
-    arr_arr_images = [['obama.jpg', 'obama_3.jpg'], ['obama_4.jpg', 'obama_5.jpg']]
+    # name  = "Barack Obama"
+    # arr_arr_images = [['obama.jpg', 'obama_3.jpg'], ['obama_4.jpg', 'obama_5.jpg']]
+    arr_arr_images = [arr_arr_images[0][0], arr_arr_images[0][1]]
     arr_audio = arr_audio[0:2]
 
     split_name = name.split(' ')
