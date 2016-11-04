@@ -53,7 +53,7 @@ def fetchBio(param):
 
     tempParam = "Barack Obama"
 
-    page = wikipedia.page(param)
+    page = wikipedia.page(tempParam)
     content = page.content
 
     content = string.replace(content, "====", '|')
@@ -112,7 +112,6 @@ def callVideoMaker(name, content):
         media = [x.media_url for x in first_fifty_result]
 
         arr_arr_images.append(media)
-
 
     video_maker.make_total_vid(name, arr_arr_images, arr_audio)
     return str("success")

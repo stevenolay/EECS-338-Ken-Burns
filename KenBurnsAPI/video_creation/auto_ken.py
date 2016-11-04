@@ -16,8 +16,9 @@ def get_img_file(f_url):
     # f_path = 'video_creation/images/' + filename
     # print "Name: " + str(f_path)
     # img = cv2.imread(f_path, 1)
-    res = urllib.urlopen(f_url)
-    image = np.asarray(bytearray(resp.read()), dtype="uint8")
+    print "URL:" + f_url
+    res = urllib.urlopen(str(f_url))
+    image = np.asarray(bytearray(res.read()), dtype="uint8")
     img = cv2.imdecode(image, cv2.IMREAD_COLOR)
 
     # if img == None:

@@ -71,6 +71,7 @@ def all_ken_runner(f_names, time_arr):
     print "IN ALL KEN RUNNER"
     vid_imgs_arr = []
     vid_eff = ["random"]
+    print "FNAMES:" + str(f_names)
     for i in range(0, len(f_names)):
         [arr, eff] = single_auto_ken_runner(f_names[i], time_arr[i], vid_eff[i-1])
         vid_imgs_arr.append(arr)
