@@ -37,7 +37,9 @@ SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
 
-BING_API_KEY = 'wrtWDMR91PXsFFEHRYN1ZQSObkZMFvHJRljl6zyNiCI'
+# BING_API_KEY = 'wrtWDMR91PXsFFEHRYN1ZQSObkZMFvHJRljl6zyNiCI'
+BING_API_KEY = 'b4lZYRDZJ/ya1EhblueNnTukTRxUBArSz66fIfz0lys'
+
 IMAGE_FILTER = 'Size:Large+Color:Color+Style:Photo'
 
 # create our little application :)
@@ -56,13 +58,15 @@ def fetchBio(param):
     page = wikipedia.page(tempParam)
     content = page.content
 
+
+
     content = string.replace(content, "====", '|')
     content = string.replace(content, "===", '|')
     content = string.replace(content, "==", '|')
     content = string.replace(content, "=", '|')
 
     firstSplit = content.split("|")
-
+    # print "FIRST SPLIT: " + str(firstSplit)
     #pageContent = [['Summary', firstSplit[0].encode('ascii', 'ignore')]]
     pageContent = []
     #reachedEarly = False
@@ -75,6 +79,7 @@ def fetchBio(param):
         content = firstSplit[i+1].strip()
         pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
 
+    #print "PAGE CONTENT LEN: " + str(len(pageContent))
     summarized = []
 
     for i in range(0, len(pageContent)):
@@ -83,6 +88,7 @@ def fetchBio(param):
         except:
             continue
 
+    #print "summarized len: " + str(len(summarized))
     img = '<img src="%s" alt="Mountain View" style="width:304px;height:228px;">'%(page.images[3])
 
     #return str(summarized)
@@ -91,9 +97,17 @@ def fetchBio(param):
 def callVideoMaker(name, content):
 
     id = 0
+    #print "Content length: " + str(content)
     arr_audio = []
+
     for each in content:
-        tts = gTTS(text = each[1], lang = 'en')
+        if each[1] == '':
+            each[1] = '.'
+        try:
+            tts = gTTS(text = each[1], lang = 'en')
+        except:
+            print each
+
         save_string = "video_creation/audio/%s"%(name + str(id)+".mp3")
         tts.save(save_string)
 
@@ -108,6 +122,7 @@ def callVideoMaker(name, content):
 
         bing_image = PyBingImageSearch(BING_API_KEY, query_topic, image_filters= IMAGE_FILTER)
         first_fifty_result= bing_image.search(limit=50, format='json') #1-50
+        #print "DOES BING RETURN ANYTHING????" + str(first_fifty_result)
 
         media = [x.media_url for x in first_fifty_result]
 

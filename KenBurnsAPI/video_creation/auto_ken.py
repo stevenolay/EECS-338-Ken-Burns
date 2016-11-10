@@ -21,8 +21,8 @@ def get_img_file(f_url):
     image = np.asarray(bytearray(res.read()), dtype="uint8")
     img = cv2.imdecode(image, cv2.IMREAD_COLOR)
 
-    # if img == None:
-    #     return [-1, -1, -1, -1]
+    if img == None:
+        return [None, -1, -1, -1]
     face_boxes = face_detect_boxes(img)
     print "ROWS: " + str(len(img)) + " COLS: " + str(len(img[0]))
     print "Loaded image file into openCV"

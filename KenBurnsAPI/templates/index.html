@@ -12,7 +12,7 @@
   <link href="{{ url_for('static', filename='style.css')}}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.teal-red.min.css" />
   <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
   <script src="{{ url_for('static', filename='Implementation.js')}}"> </script>
 
@@ -34,12 +34,19 @@
   <div id="rectangle" style="display:none;">Video Plays Here</div>
   <div id="images" style="display:none;"></div>
     <div class="jumbotron" id="jumbotron">
-    <!-- <h1 id="title">Ken  Burns</h1> -->
+    <h1 id="title">Ken  Burns</h1>
+      <!--<video controls>
+        <source src="Barack_Obama_vid.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+      </video>-->
+      <!--<iframe width="600" height="600"
+        src="Barack_Obama_vid.mp4">
+      </iframe>-->
     <div class="mdl-textfield mdl-js-textfield">
         <input class="mdl-textfield__input" type="text" id="input" value="Type A Name" onfocus="inputFocus(this)" onblur="inputBlur(this)" onkeydown="if (event.keyCode == 13) document.getElementById('search-button').click()">
     </div>
     <!-- <input type="text" id="input" value="Type A Name" onfocus="inputFocus(this)" onblur="inputBlur(this)" onkeydown="if (event.keyCode == 13) document.getElementById('search-button').click()"> -->
-    <button class= "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="search-button" onclick="make()">Search</button>
+    <button id="search" class= "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="search-button" onclick="make()">Search</button>
     </div>
 
 </div>
@@ -58,10 +65,14 @@
         <h2 class = "mdl-card__title-text"> Barack Obama </h2>
       </div>
   </div> -->
-  <div class = "mdl-card duck-pic mdl-cell mdl-cell--4-col">
-      <div class = "mdl-card__media">
-        <h3> Barack Obama </h3>
+  <div id="pic1" class = "mdl-card duck-pic mdl-cell mdl-cell--4-col mdl-shadow--2dp">
+      <div class = "mdl-card__title">
+        <h2 class = "mdl-card__title-text"> Hillary Clinton </h2>
       </div>
+      <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Aenan convallis.
+      </div> 
   </div>
   <div class = "mdl-card mdl-cell mdl-cell--4-col">
       <div class="mdl-card__media"><img src=url('Test.jpg') width="173" height="157" border="0"
@@ -76,7 +87,7 @@
      alt="" style="padding:10px;">
       </div>
       <div class = "mdl-card__title">
-        <h2 class = "mdl-card__title-text"> Barack Obama </h2>
+        <h2 class = "mdl-card__title-text"> Hillary Clinton </h2>
       </div>
   </div>
   <div class = "mdl-card mdl-cell mdl-cell--4-col">
