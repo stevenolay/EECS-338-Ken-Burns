@@ -39,6 +39,7 @@
 }
 
 /*.duck-pic .mdl-card__media {
+<<<<<<< HEAD
   background-image: url('duck.jpg');
 }
 */
@@ -49,7 +50,20 @@
 }
 
 #pic1 {
+=======
+>>>>>>> d91e26f4065fbcee507279c12bae5eee616dd177
   background-image: url('duck.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#title1 {
+  vertical-align: bottom;
+}
+*/
+
+#pic1 {
+  background-image: url('barack_portrait.jpg');
   background-size: 100%;
   background-repeat: no-repeat;
 }

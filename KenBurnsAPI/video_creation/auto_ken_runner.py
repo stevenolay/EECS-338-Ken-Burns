@@ -10,8 +10,8 @@ from mutagen.mp3 import MP3
 
 def single_auto_ken_runner(filename, num_seconds, prev_effect):
     [image, height_px, width_px, faces] = get_img_file(filename)
-    # if image == -1:
-    #     return [[], 'No Image Found']
+    if image == None:
+        return [[], 'No Image Found']
     i_arr = generate_img_array(image, num_seconds)
     [b_a, effect] = box_interpolate(width_px, height_px, num_seconds, faces, prev_effect)
     cropped_arr = ken_crop_with_ratio(i_arr, b_a)
@@ -71,10 +71,12 @@ def all_ken_runner(f_names, time_arr):
     print "IN ALL KEN RUNNER"
     vid_imgs_arr = []
     vid_eff = ["random"]
+    print "FNAMES:" + str(f_names)
     for i in range(0, len(f_names)):
         [arr, eff] = single_auto_ken_runner(f_names[i], time_arr[i], vid_eff[i-1])
-        vid_imgs_arr.append(arr)
-        vid_eff.append(eff)
+        if arr != []:
+            vid_imgs_arr.append(arr)
+            vid_eff.append(eff)
 
     curr_clip = make_full_clip(vid_imgs_arr)
     print "EFFECTS: " + str(vid_eff)

@@ -5,7 +5,9 @@ from auto_ken_runner import *
 def make_total_vid(name, arr_arr_images, arr_audio):
     # name  = "Barack Obama"
     # arr_arr_images = [['obama.jpg', 'obama_3.jpg'], ['obama_4.jpg', 'obama_5.jpg']]
-    arr_arr_images = [arr_arr_images[0][0], arr_arr_images[0][1]]
+    print "arr_arr_image: BEFORE" + str(arr_arr_images)
+    arr_arr_images = [arr_arr_images[0], arr_arr_images[1]]
+    print "arr_arr_image:" + str(arr_arr_images)
     arr_audio = arr_audio[0:2]
 
     split_name = name.split(' ')
@@ -27,6 +29,8 @@ def make_total_vid(name, arr_arr_images, arr_audio):
 
     #combine all audio into a single audio file
     concat_audio(vid_only_name, arr_audio, vid_name)
+
+    return vid_name
 
 if __name__ == '__main__':
     # all_ken_runner(['obama.jpg', 'obama_1.jpg', 'obama_2.jpg', 'obama_3.jpg', 'obama_4.jpg', 'obama_5.jpg'], [12, 10, 13, 10, 12, 14], output_fname)

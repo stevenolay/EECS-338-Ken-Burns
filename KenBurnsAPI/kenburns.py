@@ -16,7 +16,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, jsonify
 
 from jinja2 import Environment, FileSystemLoader
-import os
+import os, glob
 
 import re, urllib2
 
@@ -37,7 +37,9 @@ SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
 
-BING_API_KEY = 'wrtWDMR91PXsFFEHRYN1ZQSObkZMFvHJRljl6zyNiCI'
+# BING_API_KEY = 'wrtWDMR91PXsFFEHRYN1ZQSObkZMFvHJRljl6zyNiCI'
+BING_API_KEY = 'b4lZYRDZJ/ya1EhblueNnTukTRxUBArSz66fIfz0lys'
+
 IMAGE_FILTER = 'Size:Large+Color:Color+Style:Photo'
 
 # create our little application :)
@@ -53,8 +55,30 @@ def fetchBio(param):
 
     tempParam = "Barack Obama"
 
+    split_name = param.split(' ')
+    vid_name = ''
+    for i in range(0, len(split_name)):
+        vid_name = vid_name + str(split_name[i])
+        if i != (len(split_name) - 1):
+            vid_name = vid_name + '_'
+
+    vid_name = vid_name + '_test.mp4'
+    #check if the video of the person exists already -> then don't make video
+    vid_exists = False
+    curr_dir = os.getcwd()
+    dir_mp4 = str(curr_dir) + '/video_creation/output_videos/*.mp4'
+    vids = glob.glob(dir_mp4)
+    for f_name in vids:
+        # print "NAME:" + str(f_name)
+        if vid_name in f_name:
+            print "TRUUUUUUUUUUu"
+            vid_exists = True
+            return vid_name
+    print "Did not find previously made video - making new bio"
     page = wikipedia.page(param)
     content = page.content
+
+
 
     content = string.replace(content, "====", '|')
     content = string.replace(content, "===", '|')
@@ -62,7 +86,7 @@ def fetchBio(param):
     content = string.replace(content, "=", '|')
 
     firstSplit = content.split("|")
-
+    # print "FIRST SPLIT: " + str(firstSplit)
     #pageContent = [['Summary', firstSplit[0].encode('ascii', 'ignore')]]
     pageContent = []
     #reachedEarly = False
@@ -75,6 +99,7 @@ def fetchBio(param):
         content = firstSplit[i+1].strip()
         pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
 
+    #print "PAGE CONTENT LEN: " + str(len(pageContent))
     summarized = []
 
     for i in range(0, len(pageContent)):
@@ -83,6 +108,7 @@ def fetchBio(param):
         except:
             continue
 
+    #print "summarized len: " + str(len(summarized))
     img = '<img src="%s" alt="Mountain View" style="width:304px;height:228px;">'%(page.images[3])
 
     #return str(summarized)
@@ -91,9 +117,17 @@ def fetchBio(param):
 def callVideoMaker(name, content):
 
     id = 0
+    #print "Content length: " + str(content)
     arr_audio = []
+
     for each in content:
-        tts = gTTS(text = each[1], lang = 'en')
+        if each[1] == '':
+            each[1] = '.'
+        try:
+            tts = gTTS(text = each[1], lang = 'en')
+        except:
+            print each
+
         save_string = "video_creation/audio/%s"%(name + str(id)+".mp3")
         tts.save(save_string)
 
@@ -108,14 +142,17 @@ def callVideoMaker(name, content):
 
         bing_image = PyBingImageSearch(BING_API_KEY, query_topic, image_filters= IMAGE_FILTER)
         first_fifty_result= bing_image.search(limit=50, format='json') #1-50
+        #print "DOES BING RETURN ANYTHING????" + str(first_fifty_result)
 
         media = [x.media_url for x in first_fifty_result]
 
         arr_arr_images.append(media)
-
-
-    video_maker.make_total_vid(name, arr_arr_images, arr_audio)
-    return str("success")
+    vid_res = ' '
+    try:
+        vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
+    except:
+        print "video maker failed"
+    return vid_res
 #def make_total_vid(name, arr_arr_images, arr_audio):
 
 
