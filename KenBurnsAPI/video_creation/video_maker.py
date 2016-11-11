@@ -30,7 +30,17 @@ def make_total_vid(name, arr_arr_images, arr_audio):
     #combine all audio into a single audio file
     concat_audio(vid_only_name, arr_audio, vid_name)
 
+    delete_audio_files()
+
     return vid_name
+
+def delete_audio_files():
+    dp = 'audio/'
+    f_list = os.listdir(dp)
+    for f_name in f_list:
+        os.remove(dp + f_name)
+    print "all audio files removed"
+    return 0
 
 if __name__ == '__main__':
     # all_ken_runner(['obama.jpg', 'obama_1.jpg', 'obama_2.jpg', 'obama_3.jpg', 'obama_4.jpg', 'obama_5.jpg'], [12, 10, 13, 10, 12, 14], output_fname)
