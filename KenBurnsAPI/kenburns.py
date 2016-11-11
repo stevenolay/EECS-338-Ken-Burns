@@ -16,7 +16,7 @@ from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash, jsonify
 
 from jinja2 import Environment, FileSystemLoader
-import os
+import os, glob
 
 import re, urllib2
 
@@ -55,7 +55,27 @@ def fetchBio(param):
 
     tempParam = "Barack Obama"
 
-    page = wikipedia.page(tempParam)
+    split_name = param.split(' ')
+    vid_name = ''
+    for i in range(0, len(split_name)):
+        vid_name = vid_name + str(split_name[i])
+        if i != (len(split_name) - 1):
+            vid_name = vid_name + '_'
+
+    vid_name = vid_name + '_test.mp4'
+    #check if the video of the person exists already -> then don't make video
+    vid_exists = False
+    curr_dir = os.getcwd()
+    dir_mp4 = str(curr_dir) + '/video_creation/output_videos/*.mp4'
+    vids = glob.glob(dir_mp4)
+    for f_name in vids:
+        # print "NAME:" + str(f_name)
+        if vid_name in f_name:
+            print "TRUUUUUUUUUUu"
+            vid_exists = True
+            return vid_name
+    print "Did not find previously made video - making new bio"
+    page = wikipedia.page(param)
     content = page.content
 
 
@@ -127,9 +147,12 @@ def callVideoMaker(name, content):
         media = [x.media_url for x in first_fifty_result]
 
         arr_arr_images.append(media)
-
-    video_maker.make_total_vid(name, arr_arr_images, arr_audio)
-    return str("success")
+    vid_res = ' '
+    try:
+        vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
+    except:
+        print "video maker failed"
+    return vid_res
 #def make_total_vid(name, arr_arr_images, arr_audio):
 
 
