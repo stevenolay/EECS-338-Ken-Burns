@@ -28,19 +28,41 @@
   width: 800px;
   height: 400px;
 }
+
+#search {
+  color:#008080 !important;
+}
+
 .mdl-grid {
   display: flex !important;
   max-width: 900px;
 }
 
-.duck-pic .mdl-card__media {
+/*.duck-pic .mdl-card__media {
   background-image: url('duck.jpg');
+}
+*/
+
+#text1 {
+	position: absolute;
+	bottom: 0;
+}
+
+#pic1 {
+  background-image: url('duck.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#title1 {
+  vertical-align: bottom;
 }
 
 .mdl-card__media {
   box-sizing: border-box;
   background-size: cover;
 }
+
 /*#vid_1 {
   background-image: url('Barack_Obama_vid.mp4');
   background-position: center;
@@ -73,7 +95,7 @@
 
 #title {
   font-family: "Roboto", sans-serif;
-  font-size: 75px;
+  font-size: 50px;
   line-height: 160px;
   font-weight: normal;
   text-shadow: 0 1px 1px #fff;
@@ -84,7 +106,3 @@
 #navbar {
   color: #DCF7FA;
 }
-
-  background-image: url('searchicon.png');
-  background-position: 295px 2px;
-  background-repeat: no-repeat;
