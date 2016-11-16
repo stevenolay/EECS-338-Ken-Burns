@@ -147,11 +147,14 @@ def callVideoMaker(name, content):
         media = [x.media_url for x in first_fifty_result]
 
         arr_arr_images.append(media)
-    vid_res = ' '
+    # vid_res = ' '
+    # vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
     try:
         vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
     except:
-        print "video maker failed"
+        print "video maker failedi"
+
+    video_maker.delete_audio_files()
     return vid_res
 #def make_total_vid(name, arr_arr_images, arr_audio):
 
