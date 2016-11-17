@@ -35,8 +35,10 @@
   <div id="images" style="display:none;"></div>
     <div class="jumbotron" id="jumbotron">
     <h1 id="title">Ken  Burns</h1>
-<<<<<<< HEAD
-=======
+
+
+
+
       <!--<video controls>
         <source src="Barack_Obama_vid.mp4" type="video/mp4">
           Your browser does not support HTML5 video.
@@ -44,7 +46,7 @@
       <!--<iframe width="600" height="600"
         src="Barack_Obama_vid.mp4">
       </iframe>-->
->>>>>>> d91e26f4065fbcee507279c12bae5eee616dd177
+
     <div class="mdl-textfield mdl-js-textfield">
         <input class="mdl-textfield__input" type="text" id="input" value="Type A Name" onfocus="inputFocus(this)" onblur="inputBlur(this)" onkeydown="if (event.keyCode == 13) document.getElementById('search-button').click()">
     </div>
@@ -69,13 +71,13 @@
         <h2 class = "mdl-card__title-text"> Barack Obama </h2>
       </div>
   </div> -->
-<<<<<<< HEAD
+
   <div id="pic1" class = "mdl-card mdl-cell mdl-cell--4-col">
       <div class = "mdl-card__title"></div>
       <h2 id = class = "mdl-card__title-text"> Hillary Clinton </h2>
   </div>
 
-=======
+
   <div id="pic1" class = "mdl-card duck-pic mdl-cell mdl-cell--4-col mdl-shadow--2dp">
       <div class = "mdl-card__title">
         <h2 class = "mdl-card__title-text"> Barack Obama </h2>
@@ -113,7 +115,7 @@
       </div> -->
   </div>
   
->>>>>>> d91e26f4065fbcee507279c12bae5eee616dd177
+
   <div class = "mdl-card mdl-cell mdl-cell--4-col">
     <div id="pic1" class = "mdl-card mdl-cell mdl-cell--12-col"></div>
     <div class = "mdl-card__title">
@@ -191,6 +193,12 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="{{ url_for('static', filename='css/bootstrap.min.js')}}"></script>
+
+
+<video width="400" controls>
+  <source src="{{ url_for('static', filename='Barack_Obama_vid.mp4')}}" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
 
 </body>
 </html>

@@ -13,7 +13,7 @@ from gtts import gTTS
 from py_bing_search import PyBingImageSearch
 
 from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash, jsonify
+     abort, render_template, flash, jsonify, send_from_directory
 
 from jinja2 import Environment, FileSystemLoader
 import os, glob
@@ -36,6 +36,7 @@ DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
+MEDIA_FOLDER = 'video_creation/output_videos'
 
 # BING_API_KEY = 'wrtWDMR91PXsFFEHRYN1ZQSObkZMFvHJRljl6zyNiCI'
 BING_API_KEY = 'b4lZYRDZJ/ya1EhblueNnTukTRxUBArSz66fIfz0lys'
@@ -44,11 +45,21 @@ IMAGE_FILTER = 'Size:Large+Color:Color+Style:Photo'
 
 # create our little application :)
 app = Flask(__name__)
+
 app.config.from_object(__name__)
 
 @app.route('/')
 def show_vanilla_home():
     return render_template('index.html') #Loads Welcome Page
+
+
+# @app.route('/<path:filename>')  
+# def send_file(filename):  
+#     return send_from_directory(app.video_folder, filename)
+
+# @app.route('/video_creation/output_videos/<path:filename>')
+# def video_file(filename):
+#     return send_from_directory(MEDIA_FOLDER, filename, as_attachment=True)
 
 @app.route('/fetch/<param>')
 def fetchBio(param):
