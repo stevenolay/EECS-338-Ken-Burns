@@ -18,7 +18,13 @@ function make(){
 	document.getElementById('progress').style.display = "block";
 	document.getElementById('images').style.display = "block";
 
-	makeCall(param);
+	var videoSrc = makeCall(param);
+    var video = document.createElement('video');
+    video.src =  videoSrc ;
+    video.width = 400;
+    video.id = 'video-box';
+    document.body.appendChild(video);
+
 }
 
 function make2(){
