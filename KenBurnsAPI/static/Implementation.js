@@ -19,7 +19,9 @@ function make(){
 	document.getElementById('images').style.display = "block";
 
 	var videoSrc = makeCall(param);
+    videoSrc = "{{ url_for('static', filename=/output_videos/" + videoSrc ")}}"; 
     var video = document.createElement('video');
+
     video.src =  videoSrc ;
     video.width = 400;
     video.id = 'video-box';
