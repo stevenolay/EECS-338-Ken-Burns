@@ -19,11 +19,7 @@ function make(){
 	document.getElementById('images').style.display = "block";
 
 	var videoSrc = makeCall(param);
-    var video = document.createElement('video');
-    video.src =  videoSrc ;
-    video.width = 400;
-    video.id = 'video-box';
-    document.body.appendChild(video);
+
 
 }
 
@@ -36,7 +32,7 @@ function make2(){
 }
 
 function makeCall(input){
-	var url = "http://127.0.0.1:5000/fetch/" + input;
+	var url = "http://localhost:5000/fetch/" + input;
 	$.ajax({
         url: url,
         type: 'GET',
@@ -44,6 +40,15 @@ function makeCall(input){
         success: function(res) {
             var data = res;
             console.log(data);
+
+						videoSrc = "/static/output_videos/" + data;
+						var video = document.createElement('video');
+						video.autoplay = true;
+
+						video.src =  videoSrc;
+						video.width = 400;
+						video.id = 'video-box';
+						document.body.appendChild(video);
             return data;
         }
     });
