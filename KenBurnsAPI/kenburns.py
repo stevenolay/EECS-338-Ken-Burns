@@ -53,8 +53,8 @@ def show_vanilla_home():
     return render_template('index.html') #Loads Welcome Page
 
 
-# @app.route('/<path:filename>')  
-# def send_file(filename):  
+# @app.route('/<path:filename>')
+# def send_file(filename):
 #     return send_from_directory(app.video_folder, filename)
 
 # @app.route('/video_creation/output_videos/<path:filename>')
@@ -77,7 +77,7 @@ def fetchBio(param):
     #check if the video of the person exists already -> then don't make video
     vid_exists = False
     curr_dir = os.getcwd()
-    dir_mp4 = str(curr_dir) + '/video_creation/output_videos/*.mp4'
+    dir_mp4 = str(curr_dir) + '/static/output_videos/*.mp4'
     vids = glob.glob(dir_mp4)
     for f_name in vids:
         # print "NAME:" + str(f_name)

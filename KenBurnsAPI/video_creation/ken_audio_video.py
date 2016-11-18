@@ -19,7 +19,7 @@ def concat_audio(vid_name, aud_arr, out_name):
     #f = open(output_path, 'wb')
     # shutil.copyfileobj(open(f))
     input_vid = 'video_creation/videos_no_audio/' + vid_name
-    output_fname = 'video_creation/output_videos/' + out_name
+    output_fname = 'static/output_videos/' + out_name
     input_a = [(input_vid, None)]
     for i in range(0, len(aud_arr)):
         print "HERE"
