@@ -41,10 +41,11 @@ function makeCall(input){
             var data = res;
             console.log(data);
 
-						videoSrc = "/static/output_videos/Tim_Kaine_test.mp4";
+						videoSrc = "/static/output_videos/" + data;
 						var video = document.createElement('video');
+						video.autoplay = true;
 
-						video.src =  videoSrc ;
+						video.src =  videoSrc;
 						video.width = 400;
 						video.id = 'video-box';
 						document.body.appendChild(video);
