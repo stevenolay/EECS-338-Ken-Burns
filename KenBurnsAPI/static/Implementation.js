@@ -44,14 +44,15 @@ function makeCall(input){
 						videoSrc = "/static/output_videos/" + data;
 						var video = document.createElement('video');
 						video.autoplay = true;
-
+						video.setAttribute("controls", "controls");
 						video.src =  videoSrc;
-						video.width = 400;
+						video.width = 700;
 						video.id = 'video-box';
-						document.getElementById('images').appendChild(video);
+						document.getElementById('parent').appendChild(video);
 						var curr = document.getElementById("progress");
-						curr.parentElment.removeChild(curr);
-						delete el;
+						curr.parentElement.removeChild(curr);
+						var curr = document.getElementById("images");
+						curr.parentElement.removeChild(curr);
             return data;
         }
     });

@@ -35,7 +35,7 @@ def make_total_vid(name, arr_arr_images, arr_audio):
     return vid_name
 
 def delete_audio_files():
-    dp = 'audio/'
+    dp = 'video_creation/audio/'
     f_list = os.listdir(dp)
     for f_name in f_list:
         os.remove(dp + f_name)
@@ -44,4 +44,5 @@ def delete_audio_files():
 
 if __name__ == '__main__':
     # all_ken_runner(['obama.jpg', 'obama_1.jpg', 'obama_2.jpg', 'obama_3.jpg', 'obama_4.jpg', 'obama_5.jpg'], [12, 10, 13, 10, 12, 14], output_fname)
-    make_total_vid("Barack Obama", [['obama.jpg', 'obama_3.jpg'], ['obama_4.jpg', 'obama_5.jpg']], ["jimmy2.mp3", 'jimmy2.mp3'])
+    # make_total_vid("Barack Obama", [['obama.jpg', 'obama_3.jpg'], ['obama_4.jpg', 'obama_5.jpg']], ["jimmy2.mp3", 'jimmy2.mp3'])
+    delete_audio_files()
