@@ -48,7 +48,10 @@ function makeCall(input){
 						video.src =  videoSrc;
 						video.width = 400;
 						video.id = 'video-box';
-						document.body.appendChild(video);
+						document.getElementById('images').appendChild(video);
+						var curr = document.getElementById("progress");
+						curr.parentElment.removeChild(curr);
+						delete el;
             return data;
         }
     });
