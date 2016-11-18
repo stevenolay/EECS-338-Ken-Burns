@@ -38,38 +38,40 @@
   max-width: 900px;
 }
 
-/*.duck-pic .mdl-card__media {
-<<<<<<< HEAD
-  background-image: url('duck.jpg');
-}
-*/
-
-#text1 {
-	position: absolute;
-	bottom: 0;
-}
-
 #pic1 {
-=======
->>>>>>> d91e26f4065fbcee507279c12bae5eee616dd177
-  background-image: url('duck.jpg');
+  background-image: url('http://www.boomerslife.org/barack_obama-2.jpg');
   background-size: 100%;
   background-repeat: no-repeat;
 }
 
-#title1 {
-  vertical-align: bottom;
-}
-*/
-
-#pic1 {
-  background-image: url('barack_portrait.jpg');
+#pic2 {
+  background-image: url('http://bit.ly/1NUWKOM');
   background-size: 100%;
   background-repeat: no-repeat;
 }
 
-#title1 {
-  vertical-align: bottom;
+#pic3 {
+  background-image: url('http://bit.ly/1Rwdpce');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#pic4 {
+  background-image: url('http://bit.ly/1WvLYWK');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#pic5 {
+  background-image: url('http://bit.ly/1KhcqZB');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#pic6 {
+  background-image: url('http://bit.ly/1SK7TTK');
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
 .mdl-card__media {
