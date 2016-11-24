@@ -8,9 +8,6 @@ from ken_effects import *
 import urllib
 
 
-#NOTES: - still to do
-    #facial recognition
-    #scale down images larger than 1920 x 1080 to 1920x1080
 
 def get_img_file(f_url):
     # f_path = 'video_creation/images/' + filename

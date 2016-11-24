@@ -53,14 +53,6 @@ def show_vanilla_home():
     return render_template('index.html') #Loads Welcome Page
 
 
-# @app.route('/<path:filename>')
-# def send_file(filename):
-#     return send_from_directory(app.video_folder, filename)
-
-# @app.route('/video_creation/output_videos/<path:filename>')
-# def video_file(filename):
-#     return send_from_directory(MEDIA_FOLDER, filename, as_attachment=True)
-
 @app.route('/fetch/<param>')
 def fetchBio(param):
 
@@ -158,12 +150,12 @@ def callVideoMaker(name, content):
         media = [x.media_url for x in first_fifty_result]
 
         arr_arr_images.append(media)
-    # vid_res = ' '
+    vid_res = ''
     # vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
     try:
         vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
     except:
-        print "video maker failedi"
+        print "video maker failed"
 
     video_maker.delete_audio_files()
     return vid_res

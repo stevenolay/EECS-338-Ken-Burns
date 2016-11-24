@@ -46,7 +46,7 @@ function makeCall(input){
 						video.autoplay = true;
 						video.setAttribute("controls", "controls");
 						video.src =  videoSrc;
-						video.width = 700;
+						video.width = 1000;
 						video.id = 'video-box';
 						document.getElementById('parent').appendChild(video);
 						var curr = document.getElementById("progress");

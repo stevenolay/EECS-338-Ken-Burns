@@ -40,15 +40,19 @@ def make_full_vid(arr_arr_i, arr_audio):
     for i in range(0, len(arr_arr_i)):
         curr_aud = MP3('video_creation/audio/' + str(arr_audio[i]))
         len_aud = int(curr_aud.info.length)
+        print "AUD LEN: " + str(len_aud)
         curr_times = []
         num_images = len(arr_arr_i[i])
+        print "i: " + str(i) + " num images in i: " + str(num_images)
         avg_time = len_aud / len(arr_arr_i[i])
         if avg_time <= 10:
+            print "avg time shorter than 10"
             arr_arr_i[i] = arr_arr_i[i][:int(len_aud / 10)]
             avg_time = 10
 
         sum_time = 0
         for j in range(0, num_images):
+            print " "
             if j == (num_images - 1):
                 curr_times.append(len_aud - sum_time)
             else:
