@@ -51,6 +51,7 @@ def make_full_vid(arr_arr_i, arr_audio):
             avg_time = 10
 
         sum_time = 0
+        num_images = len(arr_arr_i[i])
         for j in range(0, num_images):
             print " "
             if j == (num_images - 1):

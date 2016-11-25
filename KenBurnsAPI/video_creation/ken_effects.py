@@ -42,7 +42,7 @@ def pick_effect(w_px, h_px, faces, prev_effect = 'random'):
     num_f = len(faces)
     effect = "random"
     if num_f == 0:
-        if (float(w_px) / float(h_px)) > 1.5: #then pan
+        if (float(w_px) / float(h_px)) > 1.25: #then pan
             if prev_effect.find("pan") == -1:
                 r = ["pan left to right", "pan right to left"]
                 effect = random.choice(r)
@@ -52,6 +52,8 @@ def pick_effect(w_px, h_px, faces, prev_effect = 'random'):
                     effect = "pan left to right"
                 else:
                     effect = "pan right to left"
+        else:
+            effect = "no_effect"
     elif num_f == 1: #zoom
         if prev_effect.find("zoom") == -1:
             r = ["zoom in", "zoom out"]

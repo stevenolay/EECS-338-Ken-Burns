@@ -144,18 +144,18 @@ def callVideoMaker(name, content):
         query_topic = name + " " + topic
 
         bing_image = PyBingImageSearch(BING_API_KEY, query_topic, image_filters= IMAGE_FILTER)
-        first_fifty_result= bing_image.search(limit=50, format='json') #1-50
+        first_fifty_result= bing_image.search(limit=7, format='json') #1-50
         #print "DOES BING RETURN ANYTHING????" + str(first_fifty_result)
 
         media = [x.media_url for x in first_fifty_result]
 
         arr_arr_images.append(media)
     vid_res = ''
-    # vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
-    try:
-        vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
-    except:
-        print "video maker failed"
+    vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
+    #try:
+    #    vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
+    #except:
+    #    print "video maker failed"
 
     video_maker.delete_audio_files()
     return vid_res
