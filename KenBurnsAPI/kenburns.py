@@ -25,6 +25,7 @@ import random
 
 # EXTERNAL API IMPORTS
 import wikipedia
+from simple_wikipedia import *
 from Summary import *
 from video_creation import video_maker
 #from video_maker import *
@@ -78,11 +79,15 @@ def fetchBio(param):
             vid_exists = True
             return vid_name
     print "Did not find previously made video - making new bio"
+
+    simple_page = simple_wikipedia.page(param)
+
+    earlyEdu = generateEarlyEdu(simple_page)
+    
+    return str(earlyEdu)
+
     page = wikipedia.page(param)
     content = page.content
-
-
-
     content = string.replace(content, "====", '|')
     content = string.replace(content, "===", '|')
     content = string.replace(content, "==", '|')
@@ -103,18 +108,19 @@ def fetchBio(param):
         pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
 
     #print "PAGE CONTENT LEN: " + str(len(pageContent))
-    summarized = []
+    # summarized = []
 
-    for i in range(0, len(pageContent)):
-        try:
-            summarized.append([ pageContent[i][0] , summarize(pageContent[i][1]) ])
-        except:
-            continue
+    # for i in range(0, len(pageContent)):
+    #     try:
+    #         summarized.append([ pageContent[i][0] , summarize(pageContent[i][1]) ])
+    #     except:
+    #         continue
 
     #print "summarized len: " + str(len(summarized))
     img = '<img src="%s" alt="Mountain View" style="width:304px;height:228px;">'%(page.images[3])
 
     #return str(summarized)
+    return summarized
     return callVideoMaker(param, summarized)
 
 def callVideoMaker(name, content):
@@ -144,30 +150,54 @@ def callVideoMaker(name, content):
         query_topic = name + " " + topic
 
         bing_image = PyBingImageSearch(BING_API_KEY, query_topic, image_filters= IMAGE_FILTER)
-        first_fifty_result= bing_image.search(limit=50, format='json') #1-50
+        first_fifty_result= bing_image.search(limit=7, format='json') #1-50
         #print "DOES BING RETURN ANYTHING????" + str(first_fifty_result)
 
         media = [x.media_url for x in first_fifty_result]
 
         arr_arr_images.append(media)
     vid_res = ''
-    # vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
-    try:
-        vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
-    except:
-        print "video maker failed"
+    vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
+    #try:
+    #    vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
+    #except:
+     #   print "video maker failed"
 
     video_maker.delete_audio_files()
     return vid_res
 #def make_total_vid(name, arr_arr_images, arr_audio):
 
-
-
-
 def summarize(content):
 
     fs = FrequencySummarizer()
     return str(fs.summarize(content, 2))
+
+def generateEarlyEdu(simple_page):
+
+    content = simple_page.content
+    content = string.replace(content, "====", '|')
+    content = string.replace(content, "===", '|')
+    content = string.replace(content, "==", '|')
+    content = string.replace(content, "=", '|')
+
+    firstSplit = content.split("|")
+    pageContent = []
+    eduEarlyIndexs = []
+    pair = 0
+    for i in range(1,len(firstSplit), 2):
+
+        topic = firstSplit[i].strip()
+        if re.match('early',topic, re.IGNORECASE):
+            eduEarlyIndexs.append(pair)
+        if re.match('education',topic, re.IGNORECASE):
+            eduEarlyIndexs.append(pair)
+
+        content = firstSplit[i+1].strip()
+        pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
+        pair += 1
+    retContent = []   
+    return [""+re.sub('\[[^)]*\]', "", pageContent[x][1]) for x in eduEarlyIndexs]
+
 
 if __name__ == '__main__':
     #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
