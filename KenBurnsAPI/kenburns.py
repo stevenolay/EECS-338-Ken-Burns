@@ -161,7 +161,7 @@ def callVideoMaker(name, content):
     #try:
     #    vid_res = video_maker.make_total_vid(name, arr_arr_images, arr_audio)
     #except:
-     #   print "video maker failed"
+
 
     video_maker.delete_audio_files()
     return vid_res

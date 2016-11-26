@@ -73,9 +73,15 @@ def zoom_box(w_px, h_px, f_box = []):
     else:
         return random_box_with_ratio(w_px, h_px)
 
-def first_last_boxes(w_px, h_px, faces, effect = 'random'):
+def first_last_boxes(w_px, h_px, faces, effect = 'no_effect'):
     start_list = [0, 0, 0, 0]
     end_list = [0, 0, 0, 0]
+    if effect.find('no_effect') != -1:
+        print "no effect"
+        start_list = [0, 0, w_px, h_px]
+        end_list = [0, 0, w_px, h_px]
+        return [start_list, end_list]
+
     if effect.find('zoom') != -1:
         temp_list = zoom_box(w_px, h_px, faces[0])
         if effect.find('in') != -1: #zoom in effect
