@@ -88,11 +88,12 @@ def fetchBio(param):
     pageContent = parseContent(param)
 
     earlyWork = generateEarlyWork(pageContent)
+    earlyWork.insert(0, "Early Work")
 
-    return earlyWork
+    #return earlyWork
 
 
-    # summarized = []
+    summarized = []
 
     # for i in range(0, len(pageContent)):
     #     try:
@@ -101,6 +102,7 @@ def fetchBio(param):
     #         continue
 
     summarized.insert(0, earlyEdu)
+    summarized.insert(0, earlyWork)
     return callVideoMaker(param, summarized)
 
 def callVideoMaker(name, content):
@@ -228,7 +230,7 @@ def generateEarlyWork(content):
                     break
                 
         sectionIndex += 1
-    return workRelatedString
+    return [workRelatedString]
 
 def naiveSearch(content, sectionIndex, triggers):
     retScentence = ""
