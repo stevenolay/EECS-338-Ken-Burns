@@ -80,7 +80,7 @@ def fetchBio(param):
             return vid_name
     print "Did not find previously made video - making new bio"
 
-    
+
 
     earlyEdu = generateEarlyEdu(param)
     earlyEdu.insert(0, "Early Life")
@@ -115,13 +115,10 @@ def callVideoMaker(name, content):
         if each[1] == '':
             each[1] = '.'
         try:
-<<<<<<< HEAD
             tts = gTTS(text = each[1], lang = 'en')
             total_text = total_text + str(each[1])
-=======
             print each[1]
             tts = gTTS(text = each[1], lang = 'en-uk')
->>>>>>> 86d04065a1126f653daab4ff1b7ea924db544b0a
         except:
             #print each
             continue
@@ -140,6 +137,8 @@ def callVideoMaker(name, content):
 
     save_string = "video_creation/audio/%s"%(name + "_total.mp3")
     tts.save(save_string)
+    arr_audio.append(name + "_total.mp3")
+
 
     arr_arr_images = []
     for each in content:
@@ -192,8 +191,8 @@ def generateEarlyEdu(param):
 
         content = firstSplit[i+1].strip()
         pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
-        pair += 1 
-    
+        pair += 1
+
     retContent = [""+re.sub('\[[^)]*\]', "", pageContent[x][1]) for x in eduEarlyIndexs]
     singular = ""
     for each in retContent:
@@ -242,7 +241,7 @@ def generateEarlyWork(content):
                         break
                 if chainOut:
                     break
-                
+
         sectionIndex += 1
     return [workRelatedString]
 
