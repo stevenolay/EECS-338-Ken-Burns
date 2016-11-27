@@ -130,7 +130,7 @@ def callVideoMaker(name, content):
 
     print total_text
     try:
-        tts = gTTS(text = total_text, lang = 'en')
+        tts = gTTS(text = total_text, lang = 'en-uk')
     except:
         print "Total text error"
 
