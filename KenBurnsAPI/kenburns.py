@@ -160,6 +160,7 @@ def callVideoMaker(name, content):
 
 
     video_maker.delete_audio_files()
+    
     return vid_res
 #def make_total_vid(name, arr_arr_images, arr_audio):
 
