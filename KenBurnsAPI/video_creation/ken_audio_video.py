@@ -22,7 +22,7 @@ def concat_audio(vid_name, aud_arr, out_name):
     output_fname = 'static/output_videos/' + out_name
     input_a = [(input_vid, None)]
     for i in range(0, len(aud_arr)):
-        print "HERE"
+        print "HERE + str audio:" + str(aud_arr)
         input_a.append(('video_creation/audio/' + str(aud_arr[i]), None))
     print str(input_a)
 

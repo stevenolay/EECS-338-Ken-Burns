@@ -157,8 +157,8 @@ def box_interpolate(w_px, h_px, num_sec, faces, prev_effect = 'random'):
     for i in range(0, num_end_interps):
         box_arr.append(box_arr[num_end_interps + num_interps + i - 1])
 
-    return [vid_wiggle(box_arr, w_px, h_px), effect]
-    # return box_arr
+    # return [vid_wiggle(box_arr, w_px, h_px), effect]
+    return [box_arr, effect]
 
 def ken_crop_with_ratio(img_arr, box_arr):
     len_arr = len(img_arr)

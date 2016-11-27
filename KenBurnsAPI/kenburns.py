@@ -122,12 +122,13 @@ def callVideoMaker(name, content):
     id = 0
     #print "Content length: " + str(content)
     arr_audio = []
-
+    total_text = ''
     for each in content:
         if each[1] == '':
             each[1] = '.'
         try:
             tts = gTTS(text = each[1], lang = 'en')
+            total_text = total_text + str(each[1])
         except:
             print each
 
@@ -136,6 +137,15 @@ def callVideoMaker(name, content):
 
         arr_audio.append(name + str(id)+".mp3")
         id += 1
+
+    print total_text
+    try:
+        tts = gTTS(text = total_text, lang = 'en')
+    except:
+        print "Total text error"
+
+    save_string = "video_creation/audio/%s"%(name + "_total.mp3")
+    tts.save(save_string)
 
     arr_arr_images = []
     for each in content:

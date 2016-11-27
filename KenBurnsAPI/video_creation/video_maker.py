@@ -8,9 +8,10 @@ def make_total_vid(name, arr_arr_images, arr_audio):
     # FIX MULTIPLE AUDIO PROBLEM
     # arr_arr_images = [['obama.jpg', 'obama_3.jpg'], ['obama_4.jpg', 'obama_5.jpg']]
     # print "arr_arr_image: BEFORE" + str(arr_arr_images)
-    arr_arr_images = [arr_arr_images[0], arr_arr_images[1]]
+    arr_arr_images = [arr_arr_images[0], arr_arr_images[1], arr_arr_images[2], arr_arr_images[3], arr_arr_images[4], arr_arr_images[5]]
     # print "arr_arr_image:" + str(arr_arr_images)
-    arr_audio = arr_audio[0:2]
+    total_aud = arr_audio[len(arr_audio) - 1]
+    arr_audio = arr_audio[0:6]
 
     split_name = name.split(' ')
     vid_name = ''
@@ -30,18 +31,24 @@ def make_total_vid(name, arr_arr_images, arr_audio):
     overall_runner(vid_only_name, arr_arr_images, arr_audio)
 
     #combine all audio into a single audio file
-    concat_audio(vid_only_name, arr_audio, vid_name)
+    concat_audio(vid_only_name, [total_aud], vid_name)
 
     delete_audio_files()
 
     return vid_name
 
 def delete_audio_files():
-    dp = 'video_creation/audio/'
-    f_list = os.listdir(dp)
-    for f_name in f_list:
-        os.remove(dp + f_name)
-    print "all audio files removed"
+    # dp = 'video_creation/audio/'
+    # f_list = os.listdir(dp)
+    # for f_name in f_list:
+    #     os.remove(dp + f_name)
+    # print "all audio files removed"
+
+    # dp = 'video_creation/videos_no_audio/'
+    # f_list = os.listdir(dp)
+    # for f_name in f_list:
+    #     os.remove(dp + f_name)
+    # print "all videos_no_audio files removed"
     return 0
 
 if __name__ == '__main__':
