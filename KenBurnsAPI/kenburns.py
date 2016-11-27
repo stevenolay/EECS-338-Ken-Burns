@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import sys
 from sys import path
 import ast
@@ -80,34 +80,18 @@ def fetchBio(param):
             return vid_name
     print "Did not find previously made video - making new bio"
 
-    simple_page = simple_wikipedia.page(param)
-
-    earlyEdu = generateEarlyEdu(simple_page)
     
-    return str(earlyEdu)
 
-    page = wikipedia.page(param)
-    content = page.content
-    content = string.replace(content, "====", '|')
-    content = string.replace(content, "===", '|')
-    content = string.replace(content, "==", '|')
-    content = string.replace(content, "=", '|')
+    earlyEdu = generateEarlyEdu(param)
+    earlyEdu.insert(0, "Early Life")
 
-    firstSplit = content.split("|")
-    # print "FIRST SPLIT: " + str(firstSplit)
-    #pageContent = [['Summary', firstSplit[0].encode('ascii', 'ignore')]]
-    pageContent = []
-    #reachedEarly = False
-    for i in range(1,len(firstSplit), 2):
+    pageContent = parseContent(param)
 
-        topic = firstSplit[i].strip()
-        #if re.match('early',topic, re.IGNORECASE):
-            #reachedEarly = True
-        #if reachedEarly:
-        content = firstSplit[i+1].strip()
-        pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
+    earlyWork = generateEarlyWork(pageContent)
 
-    #print "PAGE CONTENT LEN: " + str(len(pageContent))
+    return earlyWork
+
+
     # summarized = []
 
     # for i in range(0, len(pageContent)):
@@ -116,11 +100,7 @@ def fetchBio(param):
     #     except:
     #         continue
 
-    #print "summarized len: " + str(len(summarized))
-    img = '<img src="%s" alt="Mountain View" style="width:304px;height:228px;">'%(page.images[3])
-
-    #return str(summarized)
-    return summarized
+    summarized.insert(0, earlyEdu)
     return callVideoMaker(param, summarized)
 
 def callVideoMaker(name, content):
@@ -133,9 +113,11 @@ def callVideoMaker(name, content):
         if each[1] == '':
             each[1] = '.'
         try:
-            tts = gTTS(text = each[1], lang = 'en')
+            print each[1]
+            tts = gTTS(text = each[1], lang = 'en-uk')
         except:
-            print each
+            #print each
+            continue
 
         save_string = "video_creation/audio/%s"%(name + str(id)+".mp3")
         tts.save(save_string)
@@ -172,8 +154,8 @@ def summarize(content):
     fs = FrequencySummarizer()
     return str(fs.summarize(content, 2))
 
-def generateEarlyEdu(simple_page):
-
+def generateEarlyEdu(param):
+    simple_page = simple_wikipedia.page(param)
     content = simple_page.content
     content = string.replace(content, "====", '|')
     content = string.replace(content, "===", '|')
@@ -194,11 +176,128 @@ def generateEarlyEdu(simple_page):
 
         content = firstSplit[i+1].strip()
         pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
-        pair += 1
-    retContent = []   
-    return [""+re.sub('\[[^)]*\]', "", pageContent[x][1]) for x in eduEarlyIndexs]
+        pair += 1 
+    
+    retContent = [""+re.sub('\[[^)]*\]', "", pageContent[x][1]) for x in eduEarlyIndexs]
+    singular = ""
+    for each in retContent:
+        singular += each
+    return [singular]
+
+def parseContent(param):
+
+    page = wikipedia.page(param)
+    content = page.content
+
+    content = string.replace(content, "====", '|')
+    content = string.replace(content, "===", '|[Parent Node]')
+    content = string.replace(content, "==", '|[Parent Node]')
+    content = string.replace(content, "=", '|')
+
+    #return content
+    firstSplit = content.split("|")
+
+    pageContent = []
+    #reachedEarly = False
+    for i in range(1,len(firstSplit), 2):
+
+        topic = firstSplit[i].strip()
+        #if re.match('early',topic, re.IGNORECASE):
+            #reachedEarly = True
+        #if reachedEarly:
+        content = firstSplit[i+1].strip()
+        pageContent.append([topic.encode('ascii', 'ignore'), content.encode('ascii', 'ignore')])
+    return pageContent
+
+def generateEarlyWork(content):
+    workRelatedString = ""
+    keyWords = ['employ', 'work', 'career', 'taught', 'directed', 'elected', 'director', 'teacher', 'professor', 'lawyer', 'worker', 'employer', 'intern', 'internship']
+    contentKeys = ['career', 'early']
+    sectionIndex = 0
+    for section in content:
+        #print section[0], re.match("\[Parent Node\]",section[0], re.IGNORECASE)
+        chainOut = False;
+        if re.match("\[Parent Node\]",section[0], re.IGNORECASE):
+            for cont in contentKeys:
+                for substr in section[0].split():
+                    if re.match(cont,substr, re.IGNORECASE):
+                        workRelatedString += naiveSearch(content, sectionIndex, keyWords)
+                        chainOut = True
+                        break
+                if chainOut:
+                    break
+                
+        sectionIndex += 1
+    return workRelatedString
+
+def naiveSearch(content, sectionIndex, triggers):
+    retScentence = ""
+
+    scentences = split_into_sentences(content[sectionIndex][1])
+    for scentence in scentences:
+        for key in triggers:
+            if findWholeWord(key)(scentence):
+                retScentence += scentence
+
+    childIndices = findChildren(content, sectionIndex)
+    for child in childIndices:
+        scentences = split_into_sentences(content[child][1])
+        for scentence in scentences:
+            for key in triggers:
+                if findWholeWord(key)(scentence):
+                    retScentence += scentence
+
+    return retScentence
+
+def findChildren(content, sectionIndex):
+    childIndices = []
+    for i in range(sectionIndex + 1, len(content)):
+        if re.match("\[Parent Node\]",content[i][0], re.IGNORECASE):
+            print childIndices
+            return childIndices
+        else:
+            childIndices.append(i)
 
 
+
+#Globals for Scentence Splitting
+caps = "([A-Z])"
+prefixes = "(Mr|St|Mrs|Ms|Dr)[.]"
+suffixes = "(Inc|Ltd|Jr|Sr|Co)"
+starters = "(Mr|Mrs|Ms|Dr|He\s|She\s|It\s|They\s|Their\s|Our\s|We\s|But\s|However\s|That\s|This\s|Wherever)"
+acronyms = "([A-Z][.][A-Z][.](?:[A-Z][.])?)"
+websites = "[.](com|net|org|io|gov)"
+digits = "([0-9])"
+
+def split_into_sentences(text):
+    text = " " + text + "  "
+    text = text.replace("\n"," ")
+    text = re.sub(prefixes,"\\1<prd>",text)
+    text = re.sub(websites,"<prd>\\1",text)
+    if "Ph.D" in text: text = text.replace("Ph.D.","Ph<prd>D<prd>")
+    text = re.sub("\s" + caps + "[.] "," \\1<prd> ",text)
+    text = re.sub(acronyms+" "+starters,"\\1<stop> \\2",text)
+    text = re.sub(caps + "[.]" + caps + "[.]" + caps + "[.]","\\1<prd>\\2<prd>\\3<prd>",text)
+    text = re.sub(caps + "[.]" + caps + "[.]","\\1<prd>\\2<prd>",text)
+    text = re.sub(" "+suffixes+"[.] "+starters," \\1<stop> \\2",text)
+    text = re.sub(" "+suffixes+"[.]"," \\1<prd>",text)
+    text = re.sub(" " + caps + "[.]"," \\1<prd>",text)
+    if "”" in text: text = text.replace(".”","”.")
+    if "\"" in text: text = text.replace(".\"","\".")
+    if "!" in text: text = text.replace("!\"","\"!")
+    if "?" in text: text = text.replace("?\"","\"?")
+    text = text.replace(".",".<stop>")
+    text = text.replace("?","?<stop>")
+    text = text.replace("!","!<stop>")
+    text = text.replace("<prd>",".")
+    text = re.sub(digits + "[.]" + digits,"\\1<prd>\\2",text)
+    sentences = text.split("<stop>")
+    sentences = sentences[:-1]
+    sentences = [s.strip() for s in sentences]
+    return sentences
+
+def findWholeWord(w):
+    return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
 if __name__ == '__main__':
     #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
 	app.run(debug=True)
