@@ -115,10 +115,9 @@ def callVideoMaker(name, content):
         if each[1] == '':
             each[1] = '.'
         try:
-            tts = gTTS(text = each[1], lang = 'en')
+            tts = gTTS(text = each[1], lang = 'en-uk')
             total_text = total_text + str(each[1])
             print each[1]
-            tts = gTTS(text = each[1], lang = 'en-uk')
         except:
             #print each
             continue
