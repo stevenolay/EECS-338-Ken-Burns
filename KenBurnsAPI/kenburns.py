@@ -102,7 +102,7 @@ def fetchBio(param):
     #         continue
 
     summarized.insert(0, earlyEdu)
-    summarized.insert(0, earlyWork)
+    summarized.insert(1, earlyWork)
     return callVideoMaker(param, summarized)
 
 def callVideoMaker(name, content):
