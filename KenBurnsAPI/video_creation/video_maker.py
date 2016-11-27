@@ -8,10 +8,10 @@ def make_total_vid(name, arr_arr_images, arr_audio):
     # FIX MULTIPLE AUDIO PROBLEM
     # arr_arr_images = [['obama.jpg', 'obama_3.jpg'], ['obama_4.jpg', 'obama_5.jpg']]
     # print "arr_arr_image: BEFORE" + str(arr_arr_images)
-    arr_arr_images = [arr_arr_images[0], arr_arr_images[1], arr_arr_images[2], arr_arr_images[3], arr_arr_images[4], arr_arr_images[5]]
+    # arr_arr_images = [arr_arr_images[0], arr_arr_images[1], arr_arr_images[2], arr_arr_images[3], arr_arr_images[4], arr_arr_images[5]]
     # print "arr_arr_image:" + str(arr_arr_images)
     total_aud = arr_audio[len(arr_audio) - 1]
-    arr_audio = arr_audio[0:6]
+    arr_audio = arr_audio[0:len(arr_audio) - 1]
 
     split_name = name.split(' ')
     vid_name = ''
