@@ -9,12 +9,10 @@ function inputBlur(i){
 }
 
 function make(){
-
 	var param = document.getElementById("input").value;
 
-
 	var child = document.getElementById("jumbotron");
-    child.parentNode.removeChild(child);
+  child.parentNode.removeChild(child);
 	document.getElementById('progress').style.display = "block";
 	document.getElementById('images').style.display = "block";
 
@@ -29,6 +27,11 @@ function make2(){
     var child = document.getElementById("images");
     child.parentNode.removeChild(child);
 	document.getElementById('rectangle').style.display = "block";
+}
+
+function showAbout(){
+	document.getElementById('aboutcard').scrollIntoView(false);
+	console.log("In about card function.")
 }
 
 function makeCall(input){
@@ -46,9 +49,11 @@ function makeCall(input){
 						video.autoplay = true;
 						video.setAttribute("controls", "controls");
 						video.src =  videoSrc;
-						video.width = 1000;
+						video.width = 1200;
 						video.id = 'video-box';
-						document.getElementById('parent').appendChild(video);
+						var par = document.getElementById('parent');
+						par.height = 675;
+						par.appendChild(video);
 						var curr = document.getElementById("progress");
 						curr.parentElement.removeChild(curr);
 						var curr = document.getElementById("images");

@@ -4,38 +4,31 @@
 
 #parent {
   position: relative;
-  height: 400px;
-  width: 60%;
-  margin: 0 auto;
-  color: #008080;
+  /*background-color: #2196F3;*/
+  /*height: 400px;*/
+  /*width: 60%;*/
+  /*margin: 0 auto;*/
+  /*color: #008080;*/
 }
 
 #jumbotron {
-  background-color: #2196F3;
+  background-color: #FFFFFF;
   text-align: center;
-  position: absolute;
-  width: 70%;
-  top: 50%;
-  left: 50%;
-  /*border-radius: 30px;*/
-  transform: translate(-50%, -50%);
 }
 
 #images {
-  background-image: url('Test.jpg');
+  background-color: #FFFFFF;
   background-position: center;
   background-repeat: no-repeat;
-  width: 800px;
-  height: 400px;
+  text-align: center;
+  /*width: 800px;*/
+  height: 75px;
 }
 
-#search {
-  color:#008080 !important;
-}
 
 .mdl-grid {
   display: flex !important;
-  max-width: 900px;
+  max-width: 1200px;
 }
 
 #pic1 {
@@ -74,6 +67,11 @@
   background-repeat: no-repeat;
 }
 
+#aboutcard {
+  padding-left: 35px;
+  padding-right: 35px;
+}
+
 .mdl-card__media {
   box-sizing: border-box;
   background-size: cover;
@@ -89,18 +87,21 @@
 
 #rectangle {
     /*border-radius: 25px;*/
-    background: #87CEFA;
-    width: 800px;
-    height: 400px;
+    /*background: #87CEFA;*/
+    /*width: 800px;
+    height: 400px;*/
     font-size: 50px;
     text-align: center;
-    padding-top: 150px;
+    /*padding-top: 150px;*/
 }
 
 #progress {
+  background-color: FFFFFF;
   width: 70%;
   margin-left: auto;
   margin-right: auto;
+  position: center;
+  /*padding-top: 100px;*/
 }
 
 
@@ -112,11 +113,11 @@
 #title {
   font-family: "Roboto", sans-serif;
   font-size: 50px;
-  line-height: 160px;
+  /*line-height: 160px;*/
   font-weight: normal;
   text-shadow: 0 1px 1px #fff;
   text-align: center;
-  color: #F5F5F5;
+  /*color: #F5F5F5;*/
 }
 
 #navbar {
