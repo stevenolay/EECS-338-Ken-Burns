@@ -42,7 +42,8 @@
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
         <a class="mdl-navigation__link" href="">Find Another Bio</a>
-        <a class="mdl-navigation__link" onclick="showAbout">About</a>
+        <a class="mdl-navigation__link" onclick="showHowTo()">How To</a>
+        <a class="mdl-navigation__link" onclick="showAbout()">About</a>
       </nav>
     </div>
   </header>
@@ -50,13 +51,14 @@
     <span class="mdl-layout-title">Ken Burns</span>
     <nav class="mdl-navigation">
       <a class="mdl-navigation__link" href="">Find Another Bio</a>
+      <a class="mdl-navigation__link" onclick="showHowTo()">How To</a>
       <a class="mdl-navigation__link" onclick="showAbout()">About</a>
     </nav>
   </div>
   <main class="mdl-layout__content">
     <div class="page-content">
       <div class = "mdl-grid">
-        <div class = "mdl-card mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
+        <div id="parent-card" class = "mdl-card mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
           <div id="parent">
             <div id="rectangle" style="display:none;">Video Plays Here</div>
             <div id="images" style="display:none;"><h4>Making your biography now...</h4></div>
@@ -64,7 +66,7 @@
               <!-- <h1 id="title">Ken  Burns</h1> -->
 
               <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" id="input" value="Type A Name" onfocus="inputFocus(this)" onblur="inputBlur(this)" onkeydown="if (event.keyCode == 13) document.getElementById('search').click()">
+                <input class="mdl-textfield__input" type="text" id="input" value= "Please enter a name" onfocus="inputFocus(this)" onblur="inputBlur(this)" onkeydown="if (event.keyCode == 13) document.getElementById('search').click()">
               </div>
 
               <button id="search" class= "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="make()">Search</button>
@@ -124,9 +126,17 @@
               <h2 class = "mdl-card__title-text"> Paul Ryan </h2>
             </div>
         </div>
+        <div id="howto" class = "mdl-card mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
+          <h3> How To </h3>
+          <p>Please enter the name of a politcal figure in the search box or click the image of one of the popular searches. If there is a previously made biography of that person, the bipography will begin playing. If a biography has not already been generated prior to your search, the process of generating a video will begin and will take between 15-20 mintues. After the video is created, it will start playing in the browser.</p>
+          <p>At any time, click 'Find Another Bio' in order to begin a new biography search. For more information about the project, the team that made it, or to access the code, please scroll down or click 'About' in the navbar to see the About section.</p>
+        </div>
+
         <div id="aboutcard" class = "mdl-card mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-shadow--2dp">
           <h3> About </h3>
-          Lorum ipsum
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>To see the full project code, please visit our GitHub <a href="https://github.com/corpulentgowk/EECS-338-Ken-Burns">here</a>. </p>
         </div>
       <!-- </div> -->
     </div>

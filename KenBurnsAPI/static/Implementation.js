@@ -53,6 +53,11 @@ function showAbout(){
 	console.log("In about card function.")
 }
 
+function showHowTo(){
+	document.getElementById('howto').scrollIntoView(false);
+	console.log("In about card function.")
+}
+
 function makeCall(input){
 	var url = "http://localhost:5000/fetch/" + input;
 	$.ajax({

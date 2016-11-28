@@ -1,5 +1,5 @@
 #body {
-  background-color: #F5F5F5;
+  background-color: #FF5F5;
 }
 
 #parent {
@@ -9,6 +9,10 @@
   /*width: 60%;*/
   /*margin: 0 auto;*/
   /*color: #008080;*/
+}
+
+#parent-card{
+  background-color: #FFFFFF;
 }
 
 #jumbotron {
@@ -67,9 +71,16 @@
   background-repeat: no-repeat;
 }
 
+#howto {
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-bottom: 35px;
+}
+
 #aboutcard {
   padding-left: 35px;
   padding-right: 35px;
+  padding-bottom: 35px;
 }
 
 .mdl-card__media {
