@@ -18,6 +18,25 @@ function make(){
 
 	var videoSrc = makeCall(param);
 
+}
+
+function makePremade(name){
+	var param = name;
+	console.log("Called premade")
+	var child = document.getElementById("jumbotron");
+	if(child != null){
+		child.parentNode.removeChild(child);
+		console.log("removed jumbotron");
+		document.getElementById('progress').style.display = "block";
+		document.getElementById('images').style.display = "block";
+	}
+	else{
+		console.log("no jumbotron");
+		var child = document.getElementById('rectangle');
+		child.parentNode.removeChild(child);
+	}
+
+	var videoSrc = makeCall(param);
 
 }
 
