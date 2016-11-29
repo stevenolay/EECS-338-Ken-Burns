@@ -1,0 +1,136 @@
+#body {
+  background-color: #FF5F5;
+}
+
+#parent {
+  position: relative;
+  /*background-color: #2196F3;*/
+  /*height: 400px;*/
+  /*width: 60%;*/
+  /*margin: 0 auto;*/
+  /*color: #008080;*/
+}
+
+#parent-card{
+  background-color: #FFFFFF;
+}
+
+#jumbotron {
+  background-color: #FFFFFF;
+  text-align: center;
+}
+
+#images {
+  background-color: #FFFFFF;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  /*width: 800px;*/
+  height: 75px;
+}
+
+
+.mdl-grid {
+  display: flex !important;
+  max-width: 1200px;
+}
+
+#pic1 {
+  background-image: url('http://www.boomerslife.org/barack_obama-2.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#pic2 {
+  background-image: url('http://bit.ly/1NUWKOM');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#pic3 {
+  background-image: url('http://bit.ly/1Rwdpce');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#pic4 {
+  background-image: url('http://bit.ly/1WvLYWK');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#pic5 {
+  background-image: url('http://bit.ly/1KhcqZB');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#pic6 {
+  background-image: url('http://bit.ly/1SK7TTK');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+#howto {
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-bottom: 35px;
+}
+
+#aboutcard {
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-bottom: 35px;
+}
+
+.mdl-card__media {
+  box-sizing: border-box;
+  background-size: cover;
+}
+
+/*#vid_1 {
+  background-image: url('Barack_Obama_vid.mp4');
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 173px;
+  height: 157px;
+}*/
+
+#rectangle {
+    /*border-radius: 25px;*/
+    /*background: #87CEFA;*/
+    /*width: 800px;
+    height: 400px;*/
+    font-size: 50px;
+    text-align: center;
+    /*padding-top: 150px;*/
+}
+
+#progress {
+  background-color: FFFFFF;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  position: center;
+  /*padding-top: 100px;*/
+}
+
+
+#input {
+  width: 70%;
+  color: #989C9D;
+}
+
+#title {
+  font-family: "Roboto", sans-serif;
+  font-size: 50px;
+  /*line-height: 160px;*/
+  font-weight: normal;
+  text-shadow: 0 1px 1px #fff;
+  text-align: center;
+  /*color: #F5F5F5;*/
+}
+
+#navbar {
+  color: #DCF7FA;
+}
